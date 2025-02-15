@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emason Curtain Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.jpeg" alt="Emason Curtain Hub Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#service">SERVICE</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home" class="hero">
+        <img src="images/imageTOP.jpg" alt="Curtains Display">
+        <div class="hero-text">
+            <h1>EMASON CURTAIN HUB</h1>
+            <p>Unfolding a major beauty</p>
+            <button onclick="location.href='#service'">SHOP NOW</button>
+        </div>
+    </section>
+
+    <h2 id="service" class="section-title">PRODUCTS</h2>
+    
+    <section class="products">
+        <div class="product">
+            <img src="images/image1.jpg" alt="Black Curtain">
+            <div class="product-details">
+                <h3>Irish Quality Curtain</h3>
+                <p>Color - Milky</p>
+                <p>
+                    <label for="size">Size:</label>
+                    <select id="size" name="size" onchange="updatePrice('size', 'price', 'product1')">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="x-large">X-Large</option>
+                        <option value="xx-large">XX-Large</option>
+                    </select>
+                </p>
+                <p>Price: <span id="price">$50</span></p>
+                <button onclick="orderProduct('Irish Quality Curtain', 'Black', 'size', 'price')">ORDER</button>
+            </div>
+        </div>
+        <div class="product">
+            <img src="images/image2.jpg" alt="Black Curtain">
+            <div class="product-details">
+                <h3>Irish Quality Curtain</h3>
+                <p>Color - Light Green</p>
+                <p>
+                    <label for="size2">Size:</label>
+                    <select id="size2" name="size2" onchange="updatePrice('size2', 'price2', 'product2')">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="x-large">X-Large</option>
+                        <option value="xx-large">XX-Large</option>
+                    </select>
+                </p>
+                <p>Price: <span id="price2">$60</span></p>
+                <button onclick="orderProduct('Irish Quality Curtain', 'Black', 'size2', 'price2')">ORDER</button>
+            </div>
+        </div>
+        <div class="product">
+            <img src="images/image3.jpg" alt="Blue Curtain">
+            <div class="product-details">
+                <h3>Luxury Blue Curtain</h3>
+                <p>Color - Gold</p>
+                <p>
+                    <label for="size3">Size:</label>
+                    <select id="size3" name="size3" onchange="updatePrice('size3', 'price3', 'product3')">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="x-large">X-Large</option>
+                        <option value="xx-large">XX-Large</option>
+                    </select>
+                </p>
+                <p>Price: <span id="price3">$70</span></p>
+                <button onclick="orderProduct('Luxury Blue Curtain', 'Blue', 'size3', 'price3')">ORDER</button>
+            </div>
+        </div>
+        <div class="product">
+            <img src="images/image4.jpg" alt="Green Curtain">
+            <div class="product-details">
+                <h3>Elegant Green Curtain</h3>
+                <p>Color - Black</p>
+                <p>
+                    <label for="size4">Size:</label>
+                    <select id="size4" name="size4" onchange="updatePrice('size4', 'price4', 'product4')">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="x-large">X-Large</option>
+                        <option value="xx-large">XX-Large</option>
+                    </select>
+                </p>
+                <p>Price: <span id="price4">$80</span></p>
+                <button onclick="orderProduct('Elegant Green Curtain', 'Green', 'size4', 'price4')">ORDER</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <h2>Testimonials</h2>
+        <img src="images/logo.jpeg" alt="Emason Curtain Hub Logo">
+    </section>
+    
+    <footer>
+        <p>&copy; 2025. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const productPrices = {
+            product1: {
+                small: 50,
+                medium: 75,
+                large: 100,
+                'x-large': 125,
+                'xx-large': 150
+            },
+            product2: {
+                small: 60,
+                medium: 85,
+                large: 110,
+                'x-large': 135,
+                'xx-large': 160
+            },
+            product3: {
+                small: 70,
+                medium: 95,
+                large: 120,
+                'x-large': 145,
+                'xx-large': 170
+            },
+            product4: {
+                small: 80,
+                medium: 105,
+                large: 130,
+                'x-large': 155,
+                'xx-large': 180
+            }
+        };
+
+        function updatePrice(sizeId, priceId, productId) {
+            const size = document.getElementById(sizeId).value;
+            const price = productPrices[productId][size];
+            document.getElementById(priceId).innerText = `$${price}`;
+        }
+
+        function orderProduct(name, color, sizeId, priceId) {
+            const size = document.getElementById(sizeId).value;
+            const price = document.getElementById(priceId).innerText;
+            const message = `Hello, I would like to order the ${name} in ${color} color, size ${size} for ${price}.`;
+            const whatsappUrl = `https://wa.me/+2348084251659?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
