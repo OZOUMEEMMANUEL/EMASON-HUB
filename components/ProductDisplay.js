@@ -19,8 +19,7 @@ const ProductDisplay = ({ product }) => {
           </option>
         ))}
       </select>
-      <p>Price: ${selectedSize.price}</p>
-      {/* ...existing code... */}
+      <p>Price: ₦{selectedSize.price}</p>
     </div>
   );
 };
