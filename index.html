@@ -15,7 +15,12 @@
             <ul>
                 <li><a href="#home">HOME</a></li>
                 <li><a href="#catalog">SHOP BY CATEGORY</a></li>
-                <li><a href="#cart">CART (<span id="cart-count">0</span>)</a></li>
+                <li>
+                    <button class="cart-button" onclick="location.href='#cart'">
+                        <img src="images/cart.png" alt="Cart">
+                        CART (<span id="cart-count">0</span>)
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -235,9 +240,9 @@
 
         function showCategory(categoryId) {
             document.querySelectorAll('.products').forEach(section => {
-                section.style.display = 'none';
+                section.classList.add('hidden');
             });
-            document.getElementById(categoryId).style.display = 'block';
+            document.getElementById(categoryId).classList.remove('hidden');
         }
     </script>
 </body>
