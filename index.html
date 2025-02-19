@@ -9,12 +9,13 @@
 <body>
     <header>
         <div class="logo">
-            <img src="images/logo.jpeg" alt="Emason Curtain Hub Logo">
+            <img src="images/logo.png" alt="Emason Curtain Hub Logo">
         </div>
         <nav>
             <ul>
                 <li><a href="#home">HOME</a></li>
-                <li><a href="#service">SERVICE</a></li>
+                <li><a href="#catalog">SHOP BY CATEGORY</a></li>
+                <li><a href="#cart">CART (<span id="cart-count">0</span>)</a></li>
             </ul>
         </nav>
     </header>
@@ -24,13 +25,21 @@
         <div class="hero-text">
             <h1>EMASON CURTAIN HUB</h1>
             <p>Unfolding a major beauty</p>
-            <button onclick="location.href='#service'">SHOP NOW</button>
+            <button onclick="location.href='#catalog'">SHOP NOW</button>
         </div>
     </section>
 
-    <h2 id="service" class="section-title">PRODUCTS</h2>
-    
-    <section class="products">
+    <section id="catalog" class="catalog">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="categories">
+            <button onclick="showCategory('curtains')">Curtains</button>
+            <button onclick="showCategory('wallpapers')">Wallpapers</button>
+            <button onclick="showCategory('windowblinds')">Window Blinds</button>
+        </div>
+    </section>
+
+    <section id="curtains" class="products hidden">
+        <h3 class="section-subtitle">Curtains</h3>
         <div class="product">
             <img src="images/image1.jpg" alt="Black Curtain">
             <div class="product-details">
@@ -47,17 +56,22 @@
                     </select>
                 </p>
                 <p>Price: <span id="price">₦50</span></p>
-                <button onclick="orderProduct('Irish Quality Curtain', 'Black', 'size', 'price')">ORDER</button>
+                <button onclick="addToCart('Irish Quality Curtain', 'Milky', 'size', 'price')">ADD TO CART</button>
             </div>
         </div>
+        <!-- ...other curtain products... -->
+    </section>
+
+    <section id="wallpapers" class="products hidden">
+        <h3 class="section-subtitle">Wallpapers</h3>
         <div class="product">
-            <img src="images/image2.jpg" alt="Black Curtain">
+            <img src="images/wallpaper1.jpg" alt="Wallpaper">
             <div class="product-details">
-                <h3>Irish Quality Curtain</h3>
-                <p>Color - Light Green</p>
+                <h3>Modern Wallpaper</h3>
+                <p>Color - Grey</p>
                 <p>
-                    <label for="size2">Size:</label>
-                    <select id="size2" name="size2" onchange="updatePrice('size2', 'price2', 'product2')">
+                    <label for="size5">Size:</label>
+                    <select id="size5" name="size5" onchange="updatePrice('size5', 'price5', 'product5')">
                         <option value="small">Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
@@ -65,18 +79,23 @@
                         <option value="xx-large">XX-Large</option>
                     </select>
                 </p>
-                <p>Price: <span id="price2">₦60</span></p>
-                <button onclick="orderProduct('Irish Quality Curtain', 'Black', 'size2', 'price2')">ORDER</button>
+                <p>Price: <span id="price5">₦100</span></p>
+                <button onclick="addToCart('Modern Wallpaper', 'Grey', 'size5', 'price5')">ADD TO CART</button>
             </div>
         </div>
+        <!-- ...other wallpaper products... -->
+    </section>
+
+    <section id="windowblinds" class="products hidden">
+        <h3 class="section-subtitle">Window Blinds</h3>
         <div class="product">
-            <img src="images/image3.jpg" alt="Blue Curtain">
+            <img src="images/windowblind1.jpg" alt="Window Blind">
             <div class="product-details">
-                <h3>Luxury Blue Curtain</h3>
-                <p>Color - Gold</p>
+                <h3>Classic Window Blind</h3>
+                <p>Color - White</p>
                 <p>
-                    <label for="size3">Size:</label>
-                    <select id="size3" name="size3" onchange="updatePrice('size3', 'price3', 'product3')">
+                    <label for="size6">Size:</label>
+                    <select id="size6" name="size6" onchange="updatePrice('size6', 'price6', 'product6')">
                         <option value="small">Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
@@ -84,34 +103,34 @@
                         <option value="xx-large">XX-Large</option>
                     </select>
                 </p>
-                <p>Price: <span id="price3">₦70</span></p>
-                <button onclick="orderProduct('Luxury Blue Curtain', 'Blue', 'size3', 'price3')">ORDER</button>
+                <p>Price: <span id="price6">₦150</span></p>
+                <button onclick="addToCart('Classic Window Blind', 'White', 'size6', 'price6')">ADD TO CART</button>
             </div>
         </div>
-        <div class="product">
-            <img src="images/image4.jpg" alt="Green Curtain">
-            <div class="product-details">
-                <h3>Elegant Green Curtain</h3>
-                <p>Color - Black</p>
-                <p>
-                    <label for="size4">Size:</label>
-                    <select id="size4" name="size4" onchange="updatePrice('size4', 'price4', 'product4')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>Price: <span id="price4">₦80</span></p>
-                <button onclick="orderProduct('Elegant Green Curtain', 'Green', 'size4', 'price4')">ORDER</button>
-            </div>
-        </div>
+        <!-- ...other window blind products... -->
+    </section>
+
+    <section id="cart" class="cart">
+        <h2 class="section-title">Your Cart</h2>
+        <div id="cart-items"></div>
+        <button class="place-order-button" onclick="placeOrder()">PLACE ORDER</button>
     </section>
     
     <section class="testimonials">
         <h2>Testimonials</h2>
-        <img src="images/logo.jpeg" alt="Emason Curtain Hub Logo" class="testimonials-img">
+        <div class="testimonial">
+            <p>"Emason Curtain Hub has transformed my living room with their beautiful curtains. The quality is top-notch and the service was excellent. Highly recommend!"</p>
+            <p>- Chinedu Okafor</p>
+        </div>
+        <div class="testimonial">
+            <p>"I am extremely satisfied with the wallpapers I purchased from Emason Curtain Hub. They have a wide variety of designs and the installation was seamless. Great job!"</p>
+            <p>- Aisha Bello</p>
+        </div>
+        <div class="testimonial">
+            <p>"The window blinds I got from Emason Curtain Hub are perfect. They add a touch of elegance to my office. The customer service was also very helpful and responsive."</p>
+            <p>- Tunde Adeyemi</p>
+        </div>
+        <img src="images/logo.png" alt="Emason Curtain Hub Logo" class="testimonials-img">
     </section>
     
     <footer>
@@ -147,8 +166,24 @@
                 large: 130,
                 'x-large': 155,
                 'xx-large': 180
+            },
+            product5: {
+                small: 100,
+                medium: 125,
+                large: 150,
+                'x-large': 175,
+                'xx-large': 200
+            },
+            product6: {
+                small: 150,
+                medium: 175,
+                large: 200,
+                'x-large': 225,
+                'xx-large': 250
             }
         };
+
+        const cart = [];
 
         function updatePrice(sizeId, priceId, productId) {
             const size = document.getElementById(sizeId).value;
@@ -156,12 +191,53 @@
             document.getElementById(priceId).innerText = `₦${price}`;
         }
 
-        function orderProduct(name, color, sizeId, priceId) {
+        function addToCart(name, color, sizeId, priceId) {
             const size = document.getElementById(sizeId).value;
             const price = document.getElementById(priceId).innerText;
-            const message = `Hello, I would like to order the ${name} in ${color} color, size ${size} for ${price}.`;
+            cart.push({ name, color, size, price });
+            updateCartCount();
+            displayCartItems();
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        function displayCartItems() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            cart.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <p>${item.name} - ${item.color} - ${item.size} - ${item.price}</p>
+                    <button onclick="removeFromCart(${index})">REMOVE</button>
+                `;
+                cartItems.appendChild(itemDiv);
+            });
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            displayCartItems();
+        }
+
+        function placeOrder() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            const message = cart.map(item => `Product: ${item.name}, Color: ${item.color}, Size: ${item.size}, Price: ${item.price}`).join('\n');
             const whatsappUrl = `https://wa.me/+2348084251659?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
+        }
+
+        function showCategory(categoryId) {
+            document.querySelectorAll('.products').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(categoryId).style.display = 'block';
         }
     </script>
 </body>
