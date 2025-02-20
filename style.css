@@ -33,7 +33,7 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 2px; /* Further reduced gap */
+    gap: 1px; /* Further reduced gap */
     justify-content: flex-end; /* Align items to the right */
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
@@ -50,10 +50,10 @@ nav ul li a,
     transition: color 0.3s;
     background: none;
     border: none;
-    padding: 10px 10px; /* Reduced padding */
+    padding: 8px 8px; /* Reduced padding */
     cursor: pointer;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 0.9em; /* Reduced font size */
     display: flex;
     align-items: center;
 }
