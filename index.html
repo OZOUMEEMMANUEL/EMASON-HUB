@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="images/mainlogo.png" alt="Emason Curtain Hub Logo">
+            <img src="images/logo.png" alt="Emason Curtain Hub Logo">
         </div>
         <nav>
             <ul>
@@ -52,7 +52,7 @@
                 <p>Color - Milky</p>
                 <p>
                     <label for="size">Size:</label>
-                    <select id="size" name="size" onchange="updatePrice('size', 'price', 'product1')">
+                    <select id="size" name="size" onchange="updatePrice('size', 'quantity', 'price', 'product1')">
                         <option value="small">Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
@@ -60,8 +60,22 @@
                         <option value="xx-large">XX-Large</option>
                     </select>
                 </p>
-                <p>Price: <span id="price">₦50</span></p>
-                <button onclick="addToCart('Irish Quality Curtain', 'Milky', 'size', 'price')">ADD TO CART</button>
+                <p>
+                    <label for="quantity">Quantity:</label>
+                    <select id="quantity" name="quantity" onchange="updatePrice('size', 'quantity', 'price', 'product1')">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </p>
+                <p>Price: <span id="price">$50</span></p>
+                <button onclick="addToCart('Irish Quality Curtain', 'Milky', 'size', 'quantity', 'price')">ADD TO CART</button>
             </div>
         </div>
         <!-- ...other curtain products... -->
@@ -76,7 +90,7 @@
                 <p>Color - Grey</p>
                 <p>
                     <label for="size5">Size:</label>
-                    <select id="size5" name="size5" onchange="updatePrice('size5', 'price5', 'product5')">
+                    <select id="size5" name="size5" onchange="updatePrice('size5', 'quantity5', 'price5', 'product5')">
                         <option value="small">Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
@@ -84,8 +98,22 @@
                         <option value="xx-large">XX-Large</option>
                     </select>
                 </p>
+                <p>
+                    <label for="quantity5">Quantity:</label>
+                    <select id="quantity5" name="quantity5" onchange="updatePrice('size5', 'quantity5', 'price5', 'product5')">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </p>
                 <p>Price: <span id="price5">₦100</span></p>
-                <button onclick="addToCart('Modern Wallpaper', 'Grey', 'size5', 'price5')">ADD TO CART</button>
+                <button onclick="addToCart('Modern Wallpaper', 'Grey', 'size5', 'quantity5', 'price5')">ADD TO CART</button>
             </div>
         </div>
         <!-- ...other wallpaper products... -->
@@ -100,7 +128,7 @@
                 <p>Color - White</p>
                 <p>
                     <label for="size6">Size:</label>
-                    <select id="size6" name="size6" onchange="updatePrice('size6', 'price6', 'product6')">
+                    <select id="size6" name="size6" onchange="updatePrice('size6', 'quantity6', 'price6', 'product6')">
                         <option value="small">Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
@@ -108,8 +136,22 @@
                         <option value="xx-large">XX-Large</option>
                     </select>
                 </p>
+                <p>
+                    <label for="quantity6">Quantity:</label>
+                    <select id="quantity6" name="quantity6" onchange="updatePrice('size6', 'quantity6', 'price6', 'product6')">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </p>
                 <p>Price: <span id="price6">₦150</span></p>
-                <button onclick="addToCart('Classic Window Blind', 'White', 'size6', 'price6')">ADD TO CART</button>
+                <button onclick="addToCart('Classic Window Blind', 'White', 'size6', 'quantity6', 'price6')">ADD TO CART</button>
             </div>
         </div>
         <!-- ...other window blind products... -->
@@ -190,16 +232,18 @@
 
         const cart = [];
 
-        function updatePrice(sizeId, priceId, productId) {
+        function updatePrice(sizeId, quantityId, priceId, productId) {
             const size = document.getElementById(sizeId).value;
-            const price = productPrices[productId][size];
-            document.getElementById(priceId).innerText = `₦${price}`;
+            const quantity = document.getElementById(quantityId).value;
+            const price = productPrices[productId][size] * quantity;
+            document.getElementById(priceId).innerText = `$${price}`;
         }
 
-        function addToCart(name, color, sizeId, priceId) {
+        function addToCart(name, color, sizeId, quantityId, priceId) {
             const size = document.getElementById(sizeId).value;
+            const quantity = document.getElementById(quantityId).value;
             const price = document.getElementById(priceId).innerText;
-            cart.push({ name, color, size, price });
+            cart.push({ name, color, size, quantity, price });
             updateCartCount();
             displayCartItems();
         }
@@ -215,7 +259,7 @@
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'cart-item';
                 itemDiv.innerHTML = `
-                    <p>${item.name} - ${item.color} - ${item.size} - ${item.price}</p>
+                    <p>${item.name} - ${item.color} - ${item.size} - Quantity: ${item.quantity} - ${item.price}</p>
                     <button onclick="removeFromCart(${index})">REMOVE</button>
                 `;
                 cartItems.appendChild(itemDiv);
@@ -233,7 +277,7 @@
                 alert('Your cart is empty!');
                 return;
             }
-            const message = cart.map(item => `Product: ${item.name}, Color: ${item.color}, Size: ${item.size}, Price: ${item.price}`).join('\n');
+            const message = cart.map(item => `Product: ${item.name}, Color: ${item.color}, Size: ${item.size}, Quantity: ${item.quantity}, Price: ${item.price}`).join('\n');
             const whatsappUrl = `https://wa.me/+2348084251659?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
