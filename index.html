@@ -62,19 +62,13 @@
                 </p>
                 <p>
                     <label for="quantity">Quantity:</label>
-                    <select id="quantity" name="quantity" onchange="updatePrice('size', 'quantity', 'price', 'product1')">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('quantity', -1)">-</button>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="9" readonly>
+                        <button type="button" onclick="changeQuantity('quantity', 1)">+</button>
+                    </div>
                 </p>
-                <p>Price: <span id="price">$50</span></p>
+                <p>Price: <span id="price">₦50</span></p>
                 <button onclick="addToCart('Irish Quality Curtain', 'Milky', 'size', 'quantity', 'price')">ADD TO CART</button>
             </div>
         </div>
@@ -100,17 +94,11 @@
                 </p>
                 <p>
                     <label for="quantity5">Quantity:</label>
-                    <select id="quantity5" name="quantity5" onchange="updatePrice('size5', 'quantity5', 'price5', 'product5')">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('quantity5', -1)">-</button>
+                        <input type="number" id="quantity5" name="quantity5" value="1" min="1" max="9" readonly>
+                        <button type="button" onclick="changeQuantity('quantity5', 1)">+</button>
+                    </div>
                 </p>
                 <p>Price: <span id="price5">₦100</span></p>
                 <button onclick="addToCart('Modern Wallpaper', 'Grey', 'size5', 'quantity5', 'price5')">ADD TO CART</button>
@@ -138,17 +126,11 @@
                 </p>
                 <p>
                     <label for="quantity6">Quantity:</label>
-                    <select id="quantity6" name="quantity6" onchange="updatePrice('size6', 'quantity6', 'price6', 'product6')">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('quantity6', -1)">-</button>
+                        <input type="number" id="quantity6" name="quantity6" value="1" min="1" max="9" readonly>
+                        <button type="button" onclick="changeQuantity('quantity6', 1)">+</button>
+                    </div>
                 </p>
                 <p>Price: <span id="price6">₦150</span></p>
                 <button onclick="addToCart('Classic Window Blind', 'White', 'size6', 'quantity6', 'price6')">ADD TO CART</button>
@@ -236,7 +218,18 @@
             const size = document.getElementById(sizeId).value;
             const quantity = document.getElementById(quantityId).value;
             const price = productPrices[productId][size] * quantity;
-            document.getElementById(priceId).innerText = `$${price}`;
+            document.getElementById(priceId).innerText = `₦${price}`;
+        }
+
+        function changeQuantity(quantityId, delta) {
+            const quantityInput = document.getElementById(quantityId);
+            let quantity = parseInt(quantityInput.value);
+            quantity = Math.max(1, Math.min(9, quantity + delta));
+            quantityInput.value = quantity;
+            const sizeId = quantityId.replace('quantity', 'size');
+            const priceId = quantityId.replace('quantity', 'price');
+            const productId = quantityId.replace('quantity', 'product');
+            updatePrice(sizeId, quantityId, priceId, productId);
         }
 
         function addToCart(name, color, sizeId, quantityId, priceId) {

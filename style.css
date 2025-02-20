@@ -19,7 +19,7 @@ header {
 }
 
 .logo {
-    flex: 1; /* Ensure the logo is at the left end */
+    flex: 0 0 auto; /* Ensure the logo is at the left end */
 }
 
 .logo img {
@@ -27,7 +27,7 @@ header {
 }
 
 nav {
-    flex: 2; /* Adjust flex to make space for the logo */
+    flex: 1; /* Adjust flex to make space for the logo */
 }
 
 nav ul {
@@ -348,6 +348,38 @@ nav ul li a:active,
     background: #27408b; /* Darker Royal Blue */
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
+}
+
+/* Quantity Controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls button {
+    background: #4169e1; /* Royal Blue */
+    color: white;
+    border: 2px solid #27408b; /* Darker Royal Blue */
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    text-shadow: 0 0 5px rgba(65, 105, 225, 0.5);
+}
+
+.quantity-controls button:hover {
+    background: #27408b; /* Darker Royal Blue */
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
+}
+
+.quantity-controls input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 5px;
 }
 
 /* Footer */
