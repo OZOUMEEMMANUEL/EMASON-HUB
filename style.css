@@ -9,6 +9,10 @@ body {
 
 /* Header */
 header {
+    position: fixed; /* Add this line */
+    top: 0; /* Add this line */
+    width: 100%; /* Add this line */
+    z-index: 1000; /* Add this line */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,6 +76,16 @@ nav ul li a:active,
 }
 
 @media (max-width: 768px) {
+    header {
+        padding: 10px 15px; /* Reduced padding */
+    }
+
+    nav ul li a,
+    .cart-button {
+        padding: 6px 6px; /* Further reduced padding */
+        font-size: 0.8em; /* Further reduced font size */
+    }
+
     .hero-text h1 {
         font-size: 2em;
     }
@@ -413,4 +427,26 @@ footer {
 .cart-button:hover,
 .cart-button:focus {
     color: #27408b; /* Darker Royal Blue */
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4169e1; /* Royal Blue */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.5em;
+    display: none; /* Hidden by default */
+    z-index: 1000;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.back-to-top:hover {
+    background: #27408b; /* Darker Royal Blue */
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
 }
