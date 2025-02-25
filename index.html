@@ -77,93 +77,6 @@
     <button class="back-to-top" onclick="scrollToTop()">↑</button>
 
     <script>
-        const productPrices = {
-            product1: {
-                small: 50,
-                medium: 75,
-                large: 100,
-                'x-large': 125,
-                'xx-large': 150
-            },
-            product2: {
-                small: 60,
-                medium: 85,
-                large: 110,
-                'x-large': 135,
-                'xx-large': 160
-            },
-            product3: {
-                small: 70,
-                medium: 95,
-                large: 120,
-                'x-large': 145,
-                'xx-large': 170
-            },
-            product4: {
-                small: 80,
-                medium: 105,
-                large: 130,
-                'x-large': 155,
-                'xx-large': 180
-            },
-            product5: {
-                small: 100,
-                medium: 125,
-                large: 150,
-                'x-large': 175,
-                'xx-large': 200
-            },
-            product6: {
-                small: 150,
-                medium: 175,
-                large: 200,
-                'x-large': 225,
-                'xx-large': 250
-            },
-            product7: {
-                small: 130,
-                medium: 155,
-                large: 180,
-                'x-large': 205,
-                'xx-large': 230
-            },
-            product8: {
-                small: 150,
-                medium: 175,
-                large: 200,
-                'x-large': 225,
-                'xx-large': 250
-            },
-            product9: {
-                small: 180,
-                medium: 205,
-                large: 230,
-                'x-large': 255,
-                'xx-large': 280
-            },
-            product10: {
-                small: 200,
-                medium: 225,
-                large: 250,
-                'x-large': 275,
-                'xx-large': 300
-            },
-            product11: {
-                small: 220,
-                medium: 245,
-                large: 270,
-                'x-large': 295,
-                'xx-large': 320
-            },
-            product12: {
-                small: 240,
-                medium: 265,
-                large: 290,
-                'x-large': 315,
-                'xx-large': 340
-            }
-        };
-
         const cart = [];
 
         function updatePrice(sizeId, quantityId, priceId, productId) {
@@ -247,7 +160,6 @@
                     throw new Error('Network response was not ok');
                 }
                 const products = await response.json();
-                console.log('Products loaded:', products); // Add this line
                 const container = document.getElementById('products-container');
 
                 for (const category in products) {
@@ -288,7 +200,7 @@
                     container.appendChild(section);
                 }
             } catch (error) {
-                console.error('Failed to load products:', error); // Add this line
+                console.error('Failed to load products:', error);
             }
         }
 

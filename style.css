@@ -9,21 +9,21 @@ body {
 
 /* Header */
 header {
-    position: fixed; /* Add this line */
-    top: 0; /* Add this line */
-    width: 100%; /* Add this line */
-    z-index: 1000; /* Add this line */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px; /* Adjusted padding */
+    padding: 15px 20px;
     background: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    flex-wrap: wrap;
 }
 
 .logo {
-    flex: 0 0 auto; /* Ensure the logo is at the left end */
+    flex: 0 0 auto;
 }
 
 .logo img {
@@ -31,15 +31,15 @@ header {
 }
 
 nav {
-    flex: 1; /* Adjust flex to make space for the logo */
+    flex: 1;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 1px; /* Further reduced gap */
-    justify-content: flex-end; /* Align items to the right */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 1px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
 nav ul li {
@@ -54,10 +54,10 @@ nav ul li a,
     transition: color 0.3s;
     background: none;
     border: none;
-    padding: 8px 8px; /* Reduced padding */
+    padding: 8px 8px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 0.9em; /* Reduced font size */
+    font-size: 0.9em;
     display: flex;
     align-items: center;
 }
@@ -72,18 +72,18 @@ nav ul li a:hover,
 nav ul li a:active,
 .cart-button:hover,
 .cart-button:focus {
-    color: #4169e1; /* Royal Blue */
+    color: #4169e1;
 }
 
 @media (max-width: 768px) {
     header {
-        padding: 10px 15px; /* Reduced padding */
+        padding: 10px 15px;
     }
 
     nav ul li a,
     .cart-button {
-        padding: 6px 6px; /* Further reduced padding */
-        font-size: 0.8em; /* Further reduced font size */
+        padding: 6px 6px;
+        font-size: 0.8em;
     }
 
     .hero-text h1 {
@@ -99,7 +99,7 @@ nav ul li a:active,
     }
 
     nav ul {
-        justify-content: center; /* Center items on smaller screens */
+        justify-content: center;
     }
 }
 
@@ -108,7 +108,7 @@ nav ul li a:active,
     position: relative;
     text-align: center;
     color: #fff;
-    padding-top: 130px; /* Add this line to account for the fixed header */
+    padding-top: 130px;
 }
 
 .hero img {
@@ -141,19 +141,19 @@ nav ul li a:active,
 }
 
 .hero-text button {
-    background: #4169e1; /* Royal Blue */
+    background: #4169e1;
     color: white;
-    border: 2px solid #27408b; /* Darker Royal Blue */
-    padding: 8px 16px; /* Reduced padding */
+    border: 2px solid #27408b;
+    padding: 8px 16px;
     cursor: pointer;
     border-radius: 10px;
-    font-size: 0.9em; /* Reduced font size */
+    font-size: 0.9em;
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     text-shadow: 0 0 5px rgba(65, 105, 225, 0.5);
 }
 
 .hero-text button:hover {
-    background: #27408b; /* Darker Royal Blue */
+    background: #27408b;
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
 }
@@ -171,14 +171,14 @@ nav ul li a:active,
     text-align: center;
     font-size: 2.5em;
     margin: 40px 0 20px;
-    color: #4169e1; /* Royal Blue */
+    color: #4169e1;
 }
 
 .section-subtitle {
     text-align: center;
     font-size: 2em;
     margin: 20px 0;
-    color: #4169e1; /* Royal Blue */
+    color: #4169e1;
 }
 
 .product {
@@ -219,19 +219,19 @@ nav ul li a:active,
 }
 
 .product button {
-    background: #4169e1; /* Royal Blue */
+    background: #4169e1;
     color: white;
-    border: 2px solid #27408b; /* Darker Royal Blue */
-    padding: 8px 16px; /* Reduced padding */
+    border: 2px solid #27408b;
+    padding: 8px 16px;
     cursor: pointer;
     border-radius: 10px;
-    font-size: 0.9em; /* Reduced font size */
+    font-size: 0.9em;
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     text-shadow: 0 0 5px rgba(65, 105, 225, 0.5);
 }
 
 .product button:hover {
-    background: #27408b; /* Darker Royal Blue */
+    background: #27408b;
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
 }
@@ -252,9 +252,9 @@ nav ul li a:active,
 }
 
 .categories button {
-    background: #4169e1; /* Royal Blue */
+    background: #4169e1;
     color: white;
-    border: 2px solid #27408b; /* Darker Royal Blue */
+    border: 2px solid #27408b;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 10px;
@@ -264,7 +264,7 @@ nav ul li a:active,
 }
 
 .categories button:hover {
-    background: #27408b; /* Darker Royal Blue */
+    background: #27408b;
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
 }
@@ -279,7 +279,7 @@ nav ul li a:active,
 .testimonials h2 {
     margin-bottom: 20px;
     font-size: 2em;
-    color: #4169e1; /* Royal Blue */
+    color: #4169e1;
 }
 
 .testimonial {
@@ -332,10 +332,10 @@ nav ul li a:active,
     background: #ff4d4d;
     color: white;
     border: 2px solid #cc0000;
-    padding: 8px 16px; /* Reduced padding */
+    padding: 8px 16px;
     cursor: pointer;
     border-radius: 10px;
-    font-size: 0.9em; /* Reduced font size */
+    font-size: 0.9em;
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     text-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
 }
@@ -347,20 +347,20 @@ nav ul li a:active,
 }
 
 .place-order-button {
-    background: #4169e1; /* Royal Blue */
+    background: #4169e1;
     color: white;
-    border: 2px solid #27408b; /* Darker Royal Blue */
-    padding: 8px 16px; /* Reduced padding */
+    border: 2px solid #27408b;
+    padding: 8px 16px;
     cursor: pointer;
     border-radius: 10px;
-    font-size: 0.9em; /* Reduced font size */
+    font-size: 0.9em;
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     text-shadow: 0 0 5px rgba(65, 105, 225, 0.5);
     margin-top: 20px;
 }
 
 .place-order-button:hover {
-    background: #27408b; /* Darker Royal Blue */
+    background: #27408b;
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
 }
@@ -372,9 +372,9 @@ nav ul li a:active,
 }
 
 .quantity-controls button {
-    background: #4169e1; /* Royal Blue */
+    background: #4169e1;
     color: white;
-    border: 2px solid #27408b; /* Darker Royal Blue */
+    border: 2px solid #27408b;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
@@ -384,7 +384,7 @@ nav ul li a:active,
 }
 
 .quantity-controls button:hover {
-    background: #27408b; /* Darker Royal Blue */
+    background: #27408b;
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
 }
@@ -409,7 +409,7 @@ footer {
 .cart-button {
     display: flex;
     align-items: center;
-    color: #333; /* Default text color */
+    color: #333;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -427,31 +427,31 @@ footer {
 
 .cart-button:hover,
 .cart-button:focus {
-    color: #27408b; /* Darker Royal Blue */
+    color: #27408b;
 }
 
 .back-to-top {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #4169e1; /* Royal Blue */
+    background: #4169e1;
     color: white;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 50%;
     font-size: 1.5em;
-    display: none; /* Hidden by default */
+    display: none;
     z-index: 1000;
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 .back-to-top:hover {
-    background: #27408b; /* Darker Royal Blue */
+    background: #27408b;
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
 }
 
 #products-container {
-    padding-top: 130px; /* Adjust padding to account for the fixed header */
+    padding-top: 130px;
 }
