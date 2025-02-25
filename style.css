@@ -451,3 +451,7 @@ footer {
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(65, 105, 225, 0.7);
 }
+
+#products-container {
+    padding-top: 130px; /* Adjust padding to account for the fixed header */
+}

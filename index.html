@@ -43,422 +43,7 @@
         </div>
     </section>
 
-    <section id="curtains" class="products hidden">
-        <h3 class="section-subtitle">Curtains</h3>
-        <div class="product">
-            <img src="images/curtain1.jpg" alt="Curtain 1">
-            <div class="product-details">
-                <h3>Irish Quality Curtain</h3>
-                <p>Color - Milky</p>
-                <p>
-                    <label for="size">Size:</label>
-                    <select id="size" name="size" onchange="updatePrice('size', 'quantity', 'price', 'product1')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity', -1)">-</button>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price">₦50</span></p>
-                <button onclick="addToCart('Irish Quality Curtain', 'Milky', 'size', 'quantity', 'price')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/curtain2.jpg" alt="Curtain 2">
-            <div class="product-details">
-                <h3>Luxury Blue Curtain</h3>
-                <p>Color - Blue</p>
-                <p>
-                    <label for="size2">Size:</label>
-                    <select id="size2" name="size2" onchange="updatePrice('size2', 'quantity2', 'price2', 'product2')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity2">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity2', -1)">-</button>
-                        <input type="number" id="quantity2" name="quantity2" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity2', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price2">₦70</span></p>
-                <button onclick="addToCart('Luxury Blue Curtain', 'Blue', 'size2', 'quantity2', 'price2')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/curtain3.jpg" alt="Curtain 3">
-            <div class="product-details">
-                <h3>Elegant Green Curtain</h3>
-                <p>Color - Green</p>
-                <p>
-                    <label for="size3">Size:</label>
-                    <select id="size3" name="size3" onchange="updatePrice('size3', 'quantity3', 'price3', 'product3')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity3">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity3', -1)">-</button>
-                        <input type="number" id="quantity3" name="quantity3" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity3', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price3">₦80</span></p>
-                <button onclick="addToCart('Elegant Green Curtain', 'Green', 'size3', 'quantity3', 'price3')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/curtain4.jpg" alt="Curtain 4">
-            <div class="product-details">
-                <h3>Modern Blackout Curtain</h3>
-                <p>Color - Black</p>
-                <p>
-                    <label for="size4">Size:</label>
-                    <select id="size4" name="size4" onchange="updatePrice('size4', 'quantity4', 'price4', 'product4')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity4">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity4', -1)">-</button>
-                        <input type="number" id="quantity4" name="quantity4" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity4', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price4">₦90</span></p>
-                <button onclick="addToCart('Modern Blackout Curtain', 'Black', 'size4', 'quantity4', 'price4')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/curtain5.jpg" alt="Curtain 5">
-            <div class="product-details">
-                <h3>Classic White Curtain</h3>
-                <p>Color - White</p>
-                <p>
-                    <label for="size5">Size:</label>
-                    <select id="size5" name="size5" onchange="updatePrice('size5', 'quantity5', 'price5', 'product5')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity5">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity5', -1)">-</button>
-                        <input type="number" id="quantity5" name="quantity5" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity5', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price5">₦100</span></p>
-                <button onclick="addToCart('Classic White Curtain', 'White', 'size5', 'quantity5', 'price5')">ADD TO CART</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="wallpapers" class="products hidden">
-        <h3 class="section-subtitle">Wallpapers</h3>
-        <div class="product">
-            <img src="images/wallpaper1.jpg" alt="Wallpaper 1">
-            <div class="product-details">
-                <h3>Modern Wallpaper</h3>
-                <p>Color - Grey</p>
-                <p>
-                    <label for="size5">Size:</label>
-                    <select id="size5" name="size5" onchange="updatePrice('size5', 'quantity5', 'price5', 'product5')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity5">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity5', -1)">-</button>
-                        <input type="number" id="quantity5" name="quantity5" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity5', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price5">₦100</span></p>
-                <button onclick="addToCart('Modern Wallpaper', 'Grey', 'size5', 'quantity5', 'price5')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/wallpaper2.jpg" alt="Wallpaper 2">
-            <div class="product-details">
-                <h3>Classic Wallpaper</h3>
-                <p>Color - White</p>
-                <p>
-                    <label for="size6">Size:</label>
-                    <select id="size6" name="size6" onchange="updatePrice('size6', 'quantity6', 'price6', 'product6')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity6">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity6', -1)">-</button>
-                        <input type="number" id="quantity6" name="quantity6" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity6', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price6">₦120</span></p>
-                <button onclick="addToCart('Classic Wallpaper', 'White', 'size6', 'quantity6', 'price6')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/wallpaper3.jpg" alt="Wallpaper 2">
-            <div class="product-details">
-                <h3>Classic Wallpaper</h3>
-                <p>Color - White</p>
-                <p>
-                    <label for="size6">Size:</label>
-                    <select id="size6" name="size6" onchange="updatePrice('size6', 'quantity6', 'price6', 'product6')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity6">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity6', -1)">-</button>
-                        <input type="number" id="quantity6" name="quantity6" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity6', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price6">₦120</span></p>
-                <button onclick="addToCart('Classic Wallpaper', 'White', 'size6', 'quantity6', 'price6')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/wallpaper4.jpg" alt="Wallpaper 3">
-            <div class="product-details">
-                <h3>Elegant Wallpaper</h3>
-                <p>Color - Beige</p>
-                <p>
-                    <label for="size7">Size:</label>
-                    <select id="size7" name="size7" onchange="updatePrice('size7', 'quantity7', 'price7', 'product7')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity7">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity7', -1)">-</button>
-                        <input type="number" id="quantity7" name="quantity7" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity7', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price7">₦130</span></p>
-                <button onclick="addToCart('Elegant Wallpaper', 'Beige', 'size7', 'quantity7', 'price7')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/wallpaper5.jpg" alt="Wallpaper 5">
-            <div class="product-details">
-                <h3>Classic Wallpaper</h3>
-                <p>Color - Silver</p>
-                <p>
-                    <label for="size9">Size:</label>
-                    <select id="size9" name="size9" onchange="updatePrice('size9', 'quantity9', 'price9', 'product9')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity9">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity9', -1)">-</button>
-                        <input type="number" id="quantity9" name="quantity9" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity9', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price9">₦150</span></p>
-                <button onclick="addToCart('Classic Wallpaper', 'Silver', 'size9', 'quantity9', 'price9')">ADD TO CART</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="windowblinds" class="products hidden">
-        <h3 class="section-subtitle">Window Blinds</h3>
-        <div class="product">
-            <img src="images/window1.jpg" alt="Window Blind 1">
-            <div class="product-details">
-                <h3>Classic Window Blind</h3>
-                <p>Color - White</p>
-                <p>
-                    <label for="size7">Size:</label>
-                    <select id="size7" name="size7" onchange="updatePrice('size7', 'quantity7', 'price7', 'product7')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity7">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity7', -1)">-</button>
-                        <input type="number" id="quantity7" name="quantity7" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity7', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price7">₦150</span></p>
-                <button onclick="addToCart('Classic Window Blind', 'White', 'size7', 'quantity7', 'price7')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/window2.jpg" alt="Window Blind 2">
-            <div class="product-details">
-                <h3>Modern Window Blind</h3>
-                <p>Color - Grey</p>
-                <p>
-                    <label for="size8">Size:</label>
-                    <select id="size8" name="size8" onchange="updatePrice('size8', 'quantity8', 'price8', 'product8')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity8">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity8', -1)">-</button>
-                        <input type="number" id="quantity8" name="quantity8" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity8', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price8">₦180</span></p>
-                <button onclick="addToCart('Modern Window Blind', 'Grey', 'size8', 'quantity8', 'price8')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/window3.jpg" alt="Window Blind 3">
-            <div class="product-details">
-                <h3>Elegant Window Blind</h3>
-                <p>Color - Black</p>
-                <p>
-                    <label for="size10">Size:</label>
-                    <select id="size10" name="size10" onchange="updatePrice('size10', 'quantity10', 'price10', 'product10')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity10">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity10', -1)">-</button>
-                        <input type="number" id="quantity10" name="quantity10" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity10', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price10">₦200</span></p>
-                <button onclick="addToCart('Elegant Window Blind', 'Black', 'size10', 'quantity10', 'price10')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/window4.jpg" alt="Window Blind 4">
-            <div class="product-details">
-                <h3>Luxury Window Blind</h3>
-                <p>Color - Beige</p>
-                <p>
-                    <label for="size11">Size:</label>
-                    <select id="size11" name="size11" onchange="updatePrice('size11', 'quantity11', 'price11', 'product11')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity11">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity11', -1)">-</button>
-                        <input type="number" id="quantity11" name="quantity11" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity11', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price11">₦220</span></p>
-                <button onclick="addToCart('Luxury Window Blind', 'Beige', 'size11', 'quantity11', 'price11')">ADD TO CART</button>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/window5.jpg" alt="Window Blind 5">
-            <div class="product-details">
-                <h3>Modern Window Blind</h3>
-                <p>Color - Blue</p>
-                <p>
-                    <label for="size12">Size:</label>
-                    <select id="size12" name="size12" onchange="updatePrice('size12', 'quantity12', 'price12', 'product12')">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="x-large">X-Large</option>
-                        <option value="xx-large">XX-Large</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="quantity12">Quantity:</label>
-                    <div class="quantity-controls">
-                        <button type="button" onclick="changeQuantity('quantity12', -1)">-</button>
-                        <input type="number" id="quantity12" name="quantity12" value="1" min="1" max="9" readonly>
-                        <button type="button" onclick="changeQuantity('quantity12', 1)">+</button>
-                    </div>
-                </p>
-                <p>Price: <span id="price12">₦240</span></p>
-                <button onclick="addToCart('Modern Window Blind', 'Blue', 'size12', 'quantity12', 'price12')">ADD TO CART</button>
-            </div>
-        </div>
-    </section>
+    <div id="products-container"></div>
 
     <section id="cart" class="cart">
         <h2 class="section-title">Your Cart</h2>
@@ -643,12 +228,71 @@
         }
 
         function showCategory(categoryId) {
+            const categoryElement = document.getElementById(categoryId);
+            if (!categoryElement) {
+                console.error(`Category element with id '${categoryId}' not found.`);
+                return;
+            }
             document.querySelectorAll('.products').forEach(section => {
                 section.classList.add('hidden');
             });
-            document.getElementById(categoryId).classList.remove('hidden');
-            document.getElementById(categoryId).scrollIntoView({ behavior: 'smooth' });
+            categoryElement.classList.remove('hidden');
+            categoryElement.scrollIntoView({ behavior: 'smooth' });
         }
+
+        async function loadProducts() {
+            try {
+                const response = await fetch('products.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const products = await response.json();
+                console.log('Products loaded:', products); // Add this line
+                const container = document.getElementById('products-container');
+
+                for (const category in products) {
+                    const section = document.createElement('section');
+                    section.id = category;
+                    section.className = 'products hidden';
+                    section.innerHTML = `<h3 class="section-subtitle">${category.charAt(0).toUpperCase() + category.slice(1)}</h3>`;
+
+                    products[category].forEach((product, index) => {
+                        const productDiv = document.createElement('div');
+                        productDiv.className = 'product';
+                        productDiv.innerHTML = `
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="product-details">
+                                <h3>${product.name}</h3>
+                                <p>Color - ${product.color}</p>
+                                <p>
+                                    <label for="size${category}${index}">Size:</label>
+                                    <select id="size${category}${index}" name="size${category}${index}" onchange="updatePrice('size${category}${index}', 'quantity${category}${index}', 'price${category}${index}', '${category}${index}')">
+                                        ${Object.keys(product.sizes).map(size => `<option value="${size}">${size.charAt(0).toUpperCase() + size.slice(1)}</option>`).join('')}
+                                    </select>
+                                </p>
+                                <p>
+                                    <label for="quantity${category}${index}">Quantity:</label>
+                                    <div class="quantity-controls">
+                                        <button type="button" onclick="changeQuantity('quantity${category}${index}', -1)">-</button>
+                                        <input type="number" id="quantity${category}${index}" name="quantity${category}${index}" value="1" min="1" max="9" readonly>
+                                        <button type="button" onclick="changeQuantity('quantity${category}${index}', 1)">+</button>
+                                    </div>
+                                </p>
+                                <p>Price: <span id="price${category}${index}">₦${product.sizes.small}</span></p>
+                                <button onclick="addToCart('${product.name}', '${product.color}', 'size${category}${index}', 'quantity${category}${index}', 'price${category}${index}')">ADD TO CART</button>
+                            </div>
+                        `;
+                        section.appendChild(productDiv);
+                    });
+
+                    container.appendChild(section);
+                }
+            } catch (error) {
+                console.error('Failed to load products:', error); // Add this line
+            }
+        }
+
+        loadProducts();
 
         window.onscroll = function() {
             const backToTopButton = document.querySelector('.back-to-top');

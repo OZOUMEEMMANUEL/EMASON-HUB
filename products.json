@@ -1,0 +1,188 @@
+{
+  "curtains": [
+    {
+      "name": "Irish Quality Curtain",
+      "color": "Milky",
+      "sizes": {
+        "small": 50,
+        "medium": 75,
+        "large": 100,
+        "x-large": 125,
+        "xx-large": 150
+      },
+      "image": "images/curtain1.jpg"
+    },
+    {
+      "name": "Luxury Blue Curtain",
+      "color": "Blue",
+      "sizes": {
+        "small": 60,
+        "medium": 85,
+        "large": 110,
+        "x-large": 135,
+        "xx-large": 160
+      },
+      "image": "images/curtain2.jpg"
+    },
+    {
+      "name": "Elegant Green Curtain",
+      "color": "Green",
+      "sizes": {
+        "small": 70,
+        "medium": 95,
+        "large": 120,
+        "x-large": 145,
+        "xx-large": 170
+      },
+      "image": "images/curtain3.jpg"
+    },
+    {
+      "name": "Modern Blackout Curtain",
+      "color": "Black",
+      "sizes": {
+        "small": 80,
+        "medium": 105,
+        "large": 130,
+        "x-large": 155,
+        "xx-large": 180
+      },
+      "image": "images/curtain4.jpg"
+    },
+    {
+      "name": "Classic White Curtain",
+      "color": "White",
+      "sizes": {
+        "small": 100,
+        "medium": 125,
+        "large": 150,
+        "x-large": 175,
+        "xx-large": 200
+      },
+      "image": "images/curtain5.jpg"
+    }
+  ],
+  "wallpapers": [
+    {
+      "name": "Modern Wallpaper",
+      "color": "Grey",
+      "sizes": {
+        "small": 100,
+        "medium": 125,
+        "large": 150,
+        "x-large": 175,
+        "xx-large": 200
+      },
+      "image": "images/wallpaper1.jpg"
+    },
+    {
+      "name": "Classic Wallpaper",
+      "color": "White",
+      "sizes": {
+        "small": 110,
+        "medium": 135,
+        "large": 160,
+        "x-large": 185,
+        "xx-large": 210
+      },
+      "image": "images/wallpaper2.jpg"
+    },
+    {
+      "name": "Elegant Wallpaper",
+      "color": "Beige",
+      "sizes": {
+        "small": 120,
+        "medium": 145,
+        "large": 170,
+        "x-large": 195,
+        "xx-large": 220
+      },
+      "image": "images/wallpaper3.jpg"
+    },
+    {
+      "name": "Luxury Wallpaper",
+      "color": "Blue",
+      "sizes": {
+        "small": 130,
+        "medium": 155,
+        "large": 180,
+        "x-large": 205,
+        "xx-large": 230
+      },
+      "image": "images/wallpaper4.jpg"
+    },
+    {
+      "name": "Vintage Wallpaper",
+      "color": "Green",
+      "sizes": {
+        "small": 140,
+        "medium": 165,
+        "large": 190,
+        "x-large": 215,
+        "xx-large": 240
+      },
+      "image": "images/wallpaper5.jpg"
+    }
+  ],
+  "windowblinds": [
+    {
+      "name": "Classic Window Blind",
+      "color": "White",
+      "sizes": {
+        "small": 150,
+        "medium": 175,
+        "large": 200,
+        "x-large": 225,
+        "xx-large": 250
+      },
+      "image": "images/window1.jpg"
+    },
+    {
+      "name": "Modern Window Blind",
+      "color": "Grey",
+      "sizes": {
+        "small": 160,
+        "medium": 185,
+        "large": 210,
+        "x-large": 235,
+        "xx-large": 260
+      },
+      "image": "images/window2.jpg"
+    },
+    {
+      "name": "Elegant Window Blind",
+      "color": "Black",
+      "sizes": {
+        "small": 170,
+        "medium": 195,
+        "large": 220,
+        "x-large": 245,
+        "xx-large": 270
+      },
+      "image": "images/window3.jpg"
+    },
+    {
+      "name": "Luxury Window Blind",
+      "color": "Beige",
+      "sizes": {
+        "small": 180,
+        "medium": 205,
+        "large": 230,
+        "x-large": 255,
+        "xx-large": 280
+      },
+      "image": "images/window4.jpg"
+    },
+    {
+      "name": "Vintage Window Blind",
+      "color": "Blue",
+      "sizes": {
+        "small": 190,
+        "medium": 215,
+        "large": 240,
+        "x-large": 265,
+        "xx-large": 290
+      },
+      "image": "images/window5.jpg"
+    }
+  ]
+}
