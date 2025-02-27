@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Emason Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Emason Hub Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="admin.html">ADMIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="admin" class="admin">
+        <h2 class="section-title">Admin Panel</h2>
+        <form id="product-form">
+            <h3>Add/Edit Product</h3>
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="curtains">Curtains</option>
+                <option value="wallpapers">Wallpapers</option>
+                <option value="windowblinds">Window Blinds</option>
+            </select>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="color">Color:</label>
+            <input type="text" id="color" name="color" required>
+            <label for="image">Image URL:</label>
+            <input type="text" id="image" name="image" required>
+            <label for="sizes">Sizes (comma-separated, e.g., small:1000,medium:2000):</label>
+            <input type="text" id="sizes" name="sizes" required>
+            <button type="submit">Save Product</button>
+        </form>
+        <h3>Existing Products</h3>
+        <div id="product-list"></div>
+    </section>
+
+    <footer>
+        <p>Contact us: <a href="mailto:emasonhub@gmail.com">info@emasonhub.com</a></p>
+        <p>Follow us on Instagram: <a href="https://www.instagram.com/emason_curtainhub?igsh=MTJrZm9xMjEzcWV2Nw==" target="_blank" rel="noopener">@emasonhub</a></p>
+        <p>&copy; 2025. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const backendUrl = 'https://your-backend-url';
+
+        let productsData = {};
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+
+            document.getElementById('product-form').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const product = {
+                    category: formData.get('category'),
+                    name: formData.get('name'),
+                    color: formData.get('color'),
+                    image: formData.get('image'),
+                    sizes: formData.get('sizes').split(',').reduce((acc, size) => {
+                        const [key, value] = size.split(':');
+                        acc[key.trim()] = parseFloat(value.trim());
+                        return acc;
+                    }, {})
+                };
+
+                try {
+                    const response = await fetch(`${backendUrl}/admin/products`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(product)
+                    });
+
+                    if (response.ok) {
+                        alert('Product saved successfully');
+                        loadProducts();
+                    } else {
+                        alert('Failed to save product');
+                    }
+                } catch (error) {
+                    console.error('Error saving product:', error);
+                    alert('Failed to save product');
+                }
+            });
+        });
+
+        async function loadProducts() {
+            try {
+                const response = await fetch(`${backendUrl}/admin/products`);
+                const products = await response.json();
+                productsData = products.reduce((acc, product) => {
+                    if (!acc[product.category]) {
+                        acc[product.category] = [];
+                    }
+                    acc[product.category].push(product);
+                    return acc;
+                }, {});
+                displayProducts();
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        function displayProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+
+            Object.keys(productsData).forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.innerHTML = `<h3>${category.charAt(0).toUpperCase() + category.slice(1)}</h3>`;
+                productsData[category].forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'product-item';
+                    productDiv.innerHTML = `
+                        <p>${product.name} - ${product.color} - ${product.category}</p>
+                        <button onclick="deleteProduct('${product.id}')">DELETE</button>
+                    `;
+                    categoryDiv.appendChild(productDiv);
+                });
+                productList.appendChild(categoryDiv);
+            });
+        }
+
+        async function deleteProduct(productId) {
+            try {
+                const response = await fetch(`${backendUrl}/admin/products/${productId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('Product deleted successfully');
+                    loadProducts();
+                } else {
+                    alert('Failed to delete product');
+                }
+            } catch (error) {
+                console.error('Error deleting product:', error);
+                alert('Failed to delete product');
+            }
+        }
+
+        function showCategory(categoryId) {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+
+            if (!productsData[categoryId]) {
+                console.error(`Category '${categoryId}' not found.`);
+                return;
+            }
+
+            const categoryDiv = document.createElement('div');
+            categoryDiv.className = 'category';
+            categoryDiv.innerHTML = `<h3>${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}</h3>`;
+            productsData[categoryId].forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product-item';
+                productDiv.innerHTML = `
+                    <p>${product.name} - ${product.color} - ${product.category}</p>
+                    <button onclick="deleteProduct('${product.id}')">DELETE</button>
+                `;
+                categoryDiv.appendChild(productDiv);
+            });
+            productList.appendChild(categoryDiv);
+        }
+    </script>
+</body>
+</html>
