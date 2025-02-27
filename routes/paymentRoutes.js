@@ -27,9 +27,11 @@ router.post('/create-payment-intent', async (req, res) => {
 
             res.send({ authorization_url: response.data.data.authorization_url, reference: response.data.data.reference });
         } else {
+            console.error('Failed to create payment intent:', response.data);
             res.status(400).send({ error: 'Failed to create payment intent' });
         }
     } catch (error) {
+        console.error('Error creating payment intent:', error.response ? error.response.data : error.message);
         res.status(400).send({ error: 'Failed to create payment intent', details: error.message });
     }
 });
