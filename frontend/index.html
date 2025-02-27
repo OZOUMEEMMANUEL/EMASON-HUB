@@ -84,55 +84,79 @@
         let productsData = {};
 
         function updatePrice(sizeId, quantityId, priceId, productId) {
-            const size = document.getElementById(sizeId).value;
-            const quantity = document.getElementById(quantityId).value;
-            const pricePerUnit = productsData[productId].sizes[size];
-            const totalPrice = pricePerUnit * quantity;
-            document.getElementById(priceId).innerText = `₦${totalPrice}`;
+            try {
+                const size = document.getElementById(sizeId).value;
+                const quantity = document.getElementById(quantityId).value;
+                const pricePerUnit = productsData[productId].sizes[size];
+                const totalPrice = pricePerUnit * quantity;
+                document.getElementById(priceId).innerText = `₦${totalPrice}`;
+            } catch (error) {
+                console.error('Error updating price:', error);
+            }
         }
 
         function changeQuantity(quantityId, delta) {
-            const quantityInput = document.getElementById(quantityId);
-            let quantity = parseInt(quantityInput.value);
-            quantity = Math.max(1, Math.min(9, quantity + delta));
-            quantityInput.value = quantity;
-            const sizeId = quantityId.replace('quantity', 'size');
-            const priceId = quantityId.replace('quantity', 'price');
-            const productId = quantityId.replace('quantity', 'product');
-            updatePrice(sizeId, quantityId, priceId, productId);
+            try {
+                const quantityInput = document.getElementById(quantityId);
+                let quantity = parseInt(quantityInput.value);
+                quantity = Math.max(1, Math.min(9, quantity + delta));
+                quantityInput.value = quantity;
+                const sizeId = quantityId.replace('quantity', 'size');
+                const priceId = quantityId.replace('quantity', 'price');
+                const productId = quantityId.replace('quantity', 'product');
+                updatePrice(sizeId, quantityId, priceId, productId);
+            } catch (error) {
+                console.error('Error changing quantity:', error);
+            }
         }
 
         function addToCart(name, color, sizeId, quantityId, priceId) {
-            const size = document.getElementById(sizeId).value;
-            const quantity = document.getElementById(quantityId).value;
-            const price = document.getElementById(priceId).innerText;
-            cart.push({ name, color, size, quantity, price });
-            updateCartCount();
-            displayCartItems();
+            try {
+                const size = document.getElementById(sizeId).value;
+                const quantity = document.getElementById(quantityId).value;
+                const price = document.getElementById(priceId).innerText;
+                cart.push({ name, color, size, quantity, price });
+                updateCartCount();
+                displayCartItems();
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+            }
         }
 
         function updateCartCount() {
-            document.getElementById('cart-count').innerText = cart.length;
+            try {
+                document.getElementById('cart-count').innerText = cart.length;
+            } catch (error) {
+                console.error('Error updating cart count:', error);
+            }
         }
 
         function displayCartItems() {
-            const cartItems = document.getElementById('cart-items');
-            cartItems.innerHTML = '';
-            cart.forEach((item, index) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerHTML = `
-                    <p>${item.name} - ${item.color} - ${item.size} - Quantity: ${item.quantity} - ${item.price}</p>
-                    <button onclick="removeFromCart(${index})">REMOVE</button>
-                `;
-                cartItems.appendChild(itemDiv);
-            });
+            try {
+                const cartItems = document.getElementById('cart-items');
+                cartItems.innerHTML = '';
+                cart.forEach((item, index) => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'cart-item';
+                    itemDiv.innerHTML = `
+                        <p>${item.name} - ${item.color} - ${item.size} - Quantity: ${item.quantity} - ${item.price}</p>
+                        <button onclick="removeFromCart(${index})">REMOVE</button>
+                    `;
+                    cartItems.appendChild(itemDiv);
+                });
+            } catch (error) {
+                console.error('Error displaying cart items:', error);
+            }
         }
 
         function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartCount();
-            displayCartItems();
+            try {
+                cart.splice(index, 1);
+                updateCartCount();
+                displayCartItems();
+            } catch (error) {
+                console.error('Error removing from cart:', error);
+            }
         }
 
         async function placeOrder() {
@@ -218,6 +242,7 @@
 
         async function loadProducts() {
             try {
+                console.log('Fetching products from backend...');
                 const response = await fetch(`${backendUrl}/admin/products`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -268,54 +293,59 @@
                 });
             } catch (error) {
                 console.error('Failed to load products:', error);
+                alert('Failed to load products. Please try again later.');
             }
         }
 
         function showCategory(categoryId) {
-            const container = document.getElementById('products-container');
-            container.innerHTML = ''; // Clear any existing content
+            try {
+                const container = document.getElementById('products-container');
+                container.innerHTML = ''; // Clear any existing content
 
-            if (!productsData[categoryId]) {
-                console.error(`Category '${categoryId}' not found.`);
-                return;
+                if (!productsData[categoryId]) {
+                    console.error(`Category '${categoryId}' not found.`);
+                    return;
+                }
+
+                const section = document.createElement('section');
+                section.id = categoryId;
+                section.className = 'products';
+                section.innerHTML = `<h3 class="section-subtitle">${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}</h3>`;
+
+                productsData[categoryId].forEach((product, index) => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'product';
+                    productDiv.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="product-details">
+                            <h3>${product.name}</h3>
+                            <p>Color - ${product.color}</p>
+                            <p>
+                                <label for="size${categoryId}${index}">Size:</label>
+                                <select id="size${categoryId}${index}" name="size${categoryId}${index}" onchange="updatePrice('size${categoryId}${index}', 'quantity${categoryId}${index}', 'price${categoryId}${index}', '${categoryId}${index}')">
+                                    ${Object.keys(product.sizes).map(size => `<option value="${size}">${size.charAt(0).toUpperCase() + size.slice(1)}</option>`).join('')}
+                                </select>
+                            </p>
+                            <p>
+                                <label for="quantity${categoryId}${index}">Quantity:</label>
+                                <div class="quantity-controls">
+                                    <button type="button" onclick="changeQuantity('quantity${categoryId}${index}', -1)">-</button>
+                                    <input type="number" id="quantity${categoryId}${index}" name="quantity${categoryId}${index}" value="1" min="1" max="9" readonly>
+                                    <button type="button" onclick="changeQuantity('quantity${categoryId}${index}', 1)">+</button>
+                                </div>
+                            </p>
+                            <p>Price: <span id="price${categoryId}${index}">₦${product.sizes.small}</span></p>
+                            <button onclick="addToCart('${product.name}', '${product.color}', 'size${categoryId}${index}', 'quantity${categoryId}${index}', 'price${categoryId}${index}')">ADD TO CART</button>
+                        </div>
+                    `;
+                    section.appendChild(productDiv);
+                });
+
+                container.appendChild(section);
+                section.scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error showing category:', error);
             }
-
-            const section = document.createElement('section');
-            section.id = categoryId;
-            section.className = 'products';
-            section.innerHTML = `<h3 class="section-subtitle">${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}</h3>`;
-
-            productsData[categoryId].forEach((product, index) => {
-                const productDiv = document.createElement('div');
-                productDiv.className = 'product';
-                productDiv.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="product-details">
-                        <h3>${product.name}</h3>
-                        <p>Color - ${product.color}</p>
-                        <p>
-                            <label for="size${categoryId}${index}">Size:</label>
-                            <select id="size${categoryId}${index}" name="size${categoryId}${index}" onchange="updatePrice('size${categoryId}${index}', 'quantity${categoryId}${index}', 'price${categoryId}${index}', '${categoryId}${index}')">
-                                ${Object.keys(product.sizes).map(size => `<option value="${size}">${size.charAt(0).toUpperCase() + size.slice(1)}</option>`).join('')}
-                            </select>
-                        </p>
-                        <p>
-                            <label for="quantity${categoryId}${index}">Quantity:</label>
-                            <div class="quantity-controls">
-                                <button type="button" onclick="changeQuantity('quantity${categoryId}${index}', -1)">-</button>
-                                <input type="number" id="quantity${categoryId}${index}" name="quantity${categoryId}${index}" value="1" min="1" max="9" readonly>
-                                <button type="button" onclick="changeQuantity('quantity${categoryId}${index}', 1)">+</button>
-                            </div>
-                        </p>
-                        <p>Price: <span id="price${categoryId}${index}">₦${product.sizes.small}</span></p>
-                        <button onclick="addToCart('${product.name}', '${product.color}', 'size${categoryId}${index}', 'quantity${categoryId}${index}', 'price${categoryId}${index}')">ADD TO CART</button>
-                    </div>
-                `;
-                section.appendChild(productDiv);
-            });
-
-            container.appendChild(section);
-            section.scrollIntoView({ behavior: 'smooth' });
         }
 
         window.onscroll = function() {
@@ -332,8 +362,12 @@
         }
 
         function goToCheckout() {
-            localStorage.setItem('cart', JSON.stringify(cart));
-            window.location.href = 'checkout.html';
+            try {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                window.location.href = 'checkout.html';
+            } catch (error) {
+                console.error('Error going to checkout:', error);
+            }
         }
     </script>
 </body>
