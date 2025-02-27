@@ -165,6 +165,7 @@
             };
 
             try {
+                console.log('Sending order details:', orderDetails); // Log the order details being sent
                 const response = await fetch('/payments/create-payment-intent', {
                     method: 'POST',
                     headers: {
@@ -179,6 +180,7 @@
                     window.location.href = data.authorization_url;
                 } else {
                     alert('Failed to create payment intent');
+                    console.error('Payment intent creation failed:', data); // Log the error details
                 }
             } catch (error) {
                 console.error('Error:', error);
