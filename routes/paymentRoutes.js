@@ -5,6 +5,7 @@ const Order = require('../models/order');
 
 router.post('/create-payment-intent', async (req, res) => {
     const { amount, email, items, shippingDetails, billingDetails } = req.body;
+    console.log('Received payment intent request:', req.body); // Log the request body
     try {
         const response = await axios.post('https://api.paystack.co/transaction/initialize', {
             email,
@@ -14,6 +15,8 @@ router.post('/create-payment-intent', async (req, res) => {
                 Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`
             }
         });
+
+        console.log('Paystack response:', response.data); // Log the Paystack response
 
         if (response.data.status) {
             // Save order details with payment reference

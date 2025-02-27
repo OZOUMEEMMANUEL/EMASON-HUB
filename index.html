@@ -78,11 +78,12 @@
 
     <script>
         const cart = [];
+        let productsData = {};
 
         function updatePrice(sizeId, quantityId, priceId, productId) {
             const size = document.getElementById(sizeId).value;
             const quantity = document.getElementById(quantityId).value;
-            const price = productPrices[productId][size] * quantity;
+            const price = productsData[productId].sizes[size] * quantity;
             document.getElementById(priceId).innerText = `₦${price}`;
         }
 
@@ -159,7 +160,8 @@
                 items: cart,
                 shippingDetails,
                 billingDetails,
-                amount: cart.reduce((total, item) => total + parseFloat(item.price.replace('₦', '')), 0)
+                amount: cart.reduce((total, item) => total + parseFloat(item.price.replace('₦', '')), 0),
+                email: shippingDetails.email
             };
 
             try {
@@ -172,7 +174,7 @@
                 });
 
                 const data = await response.json();
-                console.log('Payment intent response:', data);
+                console.log('Payment intent response:', data); // Log the response
                 if (data.authorization_url) {
                     window.location.href = data.authorization_url;
                 } else {
@@ -184,18 +186,29 @@
             }
         }
 
-        function showCategory(categoryId) {
-            const categoryElement = document.getElementById(categoryId);
-            if (!categoryElement) {
-                console.error(`Category element with id '${categoryId}' not found.`);
-                return;
+        async function verifyPayment(reference) {
+            try {
+                const response = await fetch(`/payments/verify-payment?reference=${reference}`);
+                const data = await response.json();
+                if (data.status === 'success') {
+                    window.location.href = `/order-confirmation.html?orderId=${reference}`;
+                } else {
+                    window.location.href = `/order-confirmation.html?orderId=${reference}&status=failed`;
+                }
+            } catch (error) {
+                console.error('Error verifying payment:', error);
+                window.location.href = `/order-confirmation.html?orderId=${reference}&status=failed`;
             }
-            document.querySelectorAll('.products').forEach(section => {
-                section.classList.add('hidden');
-            });
-            categoryElement.classList.remove('hidden');
-            categoryElement.scrollIntoView({ behavior: 'smooth' });
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const reference = urlParams.get('reference');
+            if (reference) {
+                verifyPayment(reference);
+            }
+            loadProducts();
+        });
 
         async function loadProducts() {
             try {
@@ -203,54 +216,59 @@
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const products = await response.json();
-                const container = document.getElementById('products-container');
-
-                for (const category in products) {
-                    const section = document.createElement('section');
-                    section.id = category;
-                    section.className = 'products hidden';
-                    section.innerHTML = `<h3 class="section-subtitle">${category.charAt(0).toUpperCase() + category.slice(1)}</h3>`;
-
-                    products[category].forEach((product, index) => {
-                        const productDiv = document.createElement('div');
-                        productDiv.className = 'product';
-                        productDiv.innerHTML = `
-                            <img src="${product.image}" alt="${product.name}">
-                            <div class="product-details">
-                                <h3>${product.name}</h3>
-                                <p>Color - ${product.color}</p>
-                                <p>
-                                    <label for="size${category}${index}">Size:</label>
-                                    <select id="size${category}${index}" name="size${category}${index}" onchange="updatePrice('size${category}${index}', 'quantity${category}${index}', 'price${category}${index}', '${category}${index}')">
-                                        ${Object.keys(product.sizes).map(size => `<option value="${size}">${size.charAt(0).toUpperCase() + size.slice(1)}</option>`).join('')}
-                                    </select>
-                                </p>
-                                <p>
-                                    <label for="quantity${category}${index}">Quantity:</label>
-                                    <div class="quantity-controls">
-                                        <button type="button" onclick="changeQuantity('quantity${category}${index}', -1)">-</button>
-                                        <input type="number" id="quantity${category}${index}" name="quantity${category}${index}" value="1" min="1" max="9" readonly>
-                                        <button type="button" onclick="changeQuantity('quantity${category}${index}', 1)">+</button>
-                                    </div>
-                                </p>
-                                <p>Price: <span id="price${category}${index}">₦${product.sizes.small}</span></p>
-                                <button onclick="addToCart('${product.name}', '${product.color}', 'size${category}${index}', 'quantity${category}${index}', 'price${category}${index}')">ADD TO CART</button>
-                            </div>
-                        `;
-                        section.appendChild(productDiv);
-                    });
-
-                    container.appendChild(section);
-                }
+                productsData = await response.json();
+                console.log('Loaded products:', productsData); // Log the loaded products
             } catch (error) {
                 console.error('Failed to load products:', error);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            loadProducts();
-        });
+        function showCategory(categoryId) {
+            const container = document.getElementById('products-container');
+            container.innerHTML = ''; // Clear any existing content
+
+            if (!productsData[categoryId]) {
+                console.error(`Category '${categoryId}' not found.`);
+                return;
+            }
+
+            const section = document.createElement('section');
+            section.id = categoryId;
+            section.className = 'products';
+            section.innerHTML = `<h3 class="section-subtitle">${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}</h3>`;
+
+            productsData[categoryId].forEach((product, index) => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-details">
+                        <h3>${product.name}</h3>
+                        <p>Color - ${product.color}</p>
+                        <p>
+                            <label for="size${categoryId}${index}">Size:</label>
+                            <select id="size${categoryId}${index}" name="size${categoryId}${index}" onchange="updatePrice('size${categoryId}${index}', 'quantity${categoryId}${index}', 'price${categoryId}${index}', '${categoryId}${index}')">
+                                ${Object.keys(product.sizes).map(size => `<option value="${size}">${size.charAt(0).toUpperCase() + size.slice(1)}</option>`).join('')}
+                            </select>
+                        </p>
+                        <p>
+                            <label for="quantity${categoryId}${index}">Quantity:</label>
+                            <div class="quantity-controls">
+                                <button type="button" onclick="changeQuantity('quantity${categoryId}${index}', -1)">-</button>
+                                <input type="number" id="quantity${categoryId}${index}" name="quantity${categoryId}${index}" value="1" min="1" max="9" readonly>
+                                <button type="button" onclick="changeQuantity('quantity${categoryId}${index}', 1)">+</button>
+                            </div>
+                        </p>
+                        <p>Price: <span id="price${categoryId}${index}">₦${product.sizes.small}</span></p>
+                        <button onclick="addToCart('${product.name}', '${product.color}', 'size${categoryId}${index}', 'quantity${categoryId}${index}', 'price${categoryId}${index}')">ADD TO CART</button>
+                    </div>
+                `;
+                section.appendChild(productDiv);
+            });
+
+            container.appendChild(section);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
 
         window.onscroll = function() {
             const backToTopButton = document.querySelector('.back-to-top');

@@ -454,6 +454,7 @@ footer {
 
 #products-container {
     padding-top: 130px;
+    display: block; /* Ensure the container is visible */
 }
 
 /* Modal Styles */
