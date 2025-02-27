@@ -455,3 +455,77 @@ footer {
 #products-container {
     padding-top: 130px;
 }
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    margin: 15% auto;
+    padding: 20px;
+    width: 53.33%; /* Reduced to 2/3 of its original size */
+    max-width: 700px;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.thumbnail-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 40px; /* Reduced size */
+    height: 40px; /* Reduced size */
+    margin: 0 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+.thumbnail:hover,
+.thumbnail.active {
+    border: 2px solid #4169e1;
+}
+
+/* Adjust size selection dropdown */
+.product-details select {
+    max-width: 100px;
+}
+
+.hidden {
+    display: none;
+}

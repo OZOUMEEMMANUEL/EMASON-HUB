@@ -10,7 +10,9 @@
         "x-large": 125,
         "xx-large": 150
       },
-      "image": "images/curtain1.jpg"
+      "image": "images/curtain1.jpg",
+      "image2": "images/curtain1_side1.jpg",
+      "image3": "images/curtain1_side2.jpg"
     },
     {
       "name": "Luxury Blue Curtain",
@@ -22,7 +24,9 @@
         "x-large": 135,
         "xx-large": 160
       },
-      "image": "images/curtain2.jpg"
+      "image": "images/curtain2.jpg",
+      "image2": "images/curtain2_side1.jpg",
+      "image3": "images/curtain2_side2.jpg"
     },
     {
       "name": "Elegant Green Curtain",
@@ -34,7 +38,9 @@
         "x-large": 145,
         "xx-large": 170
       },
-      "image": "images/curtain3.jpg"
+      "image": "images/curtain3.jpg",
+      "image2": "images/curtain3_side1.jpg",
+      "image3": "images/curtain3_side2.jpg"
     },
     {
       "name": "Modern Blackout Curtain",
@@ -46,7 +52,9 @@
         "x-large": 155,
         "xx-large": 180
       },
-      "image": "images/curtain4.jpg"
+      "image": "images/curtain4.jpg",
+      "image2": "images/curtain4_side1.jpg",
+      "image3": "images/curtain4_side2.jpg"
     },
     {
       "name": "Classic White Curtain",
@@ -58,7 +66,9 @@
         "x-large": 175,
         "xx-large": 200
       },
-      "image": "images/curtain5.jpg"
+      "image": "images/curtain5.jpg",
+      "image2": "images/curtain5_side1.jpg",
+      "image3": "images/curtain5_side2.jpg"
     }
   ],
   "wallpapers": [
@@ -72,7 +82,9 @@
         "x-large": 175,
         "xx-large": 200
       },
-      "image": "images/wallpaper1.jpg"
+      "image": "images/wallpaper1.jpg",
+      "image2": "images/wallpaper1_side1.jpg",
+      "image3": "images/wallpaper1_side2.jpg"
     },
     {
       "name": "Classic Wallpaper",
@@ -84,7 +96,9 @@
         "x-large": 185,
         "xx-large": 210
       },
-      "image": "images/wallpaper2.jpg"
+      "image": "images/wallpaper2.jpg",
+      "image2": "images/wallpaper2_side1.jpg",
+      "image3": "images/wallpaper2_side2.jpg"
     },
     {
       "name": "Elegant Wallpaper",
@@ -96,7 +110,9 @@
         "x-large": 195,
         "xx-large": 220
       },
-      "image": "images/wallpaper3.jpg"
+      "image": "images/wallpaper3.jpg",
+      "image2": "images/wallpaper3_side1.jpg",
+      "image3": "images/wallpaper3_side2.jpg"
     },
     {
       "name": "Luxury Wallpaper",
@@ -108,7 +124,9 @@
         "x-large": 205,
         "xx-large": 230
       },
-      "image": "images/wallpaper4.jpg"
+      "image": "images/wallpaper4.jpg",
+      "image2": "images/wallpaper4_side1.jpg",
+      "image3": "images/wallpaper4_side2.jpg"
     },
     {
       "name": "Vintage Wallpaper",
@@ -120,7 +138,9 @@
         "x-large": 215,
         "xx-large": 240
       },
-      "image": "images/wallpaper5.jpg"
+      "image": "images/wallpaper5.jpg",
+      "image2": "images/wallpaper5_side1.jpg",
+      "image3": "images/wallpaper5_side2.jpg"
     }
   ],
   "windowblinds": [
@@ -134,7 +154,9 @@
         "x-large": 225,
         "xx-large": 250
       },
-      "image": "images/window1.jpg"
+      "image": "images/window1.jpg",
+      "image2": "images/window1_side1.jpg",
+      "image3": "images/window1_side2.jpg"
     },
     {
       "name": "Modern Window Blind",
@@ -146,7 +168,9 @@
         "x-large": 235,
         "xx-large": 260
       },
-      "image": "images/window2.jpg"
+      "image": "images/window2.jpg",
+      "image2": "images/window2_side1.jpg",
+      "image3": "images/window2_side2.jpg"
     },
     {
       "name": "Elegant Window Blind",
@@ -158,7 +182,9 @@
         "x-large": 245,
         "xx-large": 270
       },
-      "image": "images/window3.jpg"
+      "image": "images/window3.jpg",
+      "image2": "images/window3_side1.jpg",
+      "image3": "images/window3_side2.jpg"
     },
     {
       "name": "Luxury Window Blind",
@@ -170,7 +196,9 @@
         "x-large": 255,
         "xx-large": 280
       },
-      "image": "images/window4.jpg"
+      "image": "images/window4.jpg",
+      "image2": "images/window4_side1.jpg",
+      "image3": "images/window4_side2.jpg"
     },
     {
       "name": "Vintage Window Blind",
@@ -182,7 +210,9 @@
         "x-large": 265,
         "xx-large": 290
       },
-      "image": "images/window5.jpg"
+      "image": "images/window5.jpg",
+      "image2": "images/window5_side1.jpg",
+      "image3": "images/window5_side2.jpg"
     }
   ]
 }

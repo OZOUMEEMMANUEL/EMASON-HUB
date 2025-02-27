@@ -76,6 +76,69 @@
 
     <button class="back-to-top" onclick="scrollToTop()">↑</button>
 
+    <!-- Modal Structure -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" src="" alt="Product Image">
+            <div class="thumbnail-container">
+                <img class="thumbnail" id="thumb1" src="" onclick="showImage(0)" title="Thumbnail 1">
+                <img class="thumbnail" id="thumb2" src="" onclick="showImage(1)" title="Thumbnail 2">
+                <img class="thumbnail" id="thumb3" src="" onclick="showImage(2)" title="Thumbnail 3">
+            </div>
+        </div>
+    </div>
+
+    <!-- User Registration Form -->
+    <section id="register" class="register">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+    </section>
+
+    <!-- User Login Form -->
+    <section id="login" class="login">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </section>
+
+    <!-- Checkout Page -->
+    <section id="checkout" class="checkout hidden">
+        <h2>Checkout</h2>
+        <form id="checkoutForm">
+            <h3>Shipping Details</h3>
+            <input type="text" id="shippingName" placeholder="Full Name" required>
+            <input type="text" id="shippingAddress" placeholder="Address" required>
+            <input type="text" id="shippingCity" placeholder="City" required>
+            <input type="text" id="shippingState" placeholder="State" required>
+            <input type="text" id="shippingZip" placeholder="Zip Code" required>
+            <input type="text" id="shippingCountry" placeholder="Country" required>
+
+            <h3>Billing Details</h3>
+            <input type="text" id="billingName" placeholder="Full Name" required>
+            <input type="text" id="billingAddress" placeholder="Address" required>
+            <input type="text" id="billingCity" placeholder="City" required>
+            <input type="text" id="billingState" placeholder="State" required>
+            <input type="text" id="billingZip" placeholder="Zip Code" required>
+            <input type="text" id="billingCountry" placeholder="Country" required>
+
+            <h3>Payment Details</h3>
+            <div id="card-element"></div> <!-- Stripe Elements will be inserted here -->
+
+            <button type="submit">Pay Now</button>
+        </form>
+    </section>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
     <script>
         const cart = [];
 
@@ -135,22 +198,96 @@
                 alert('Your cart is empty!');
                 return;
             }
-            const message = cart.map(item => `Product: ${item.name}, Color: ${item.color}, Size: ${item.size}, Quantity: ${item.quantity}, Price: ${item.price}`).join('\n');
-            const whatsappUrl = `https://wa.me/+2348084251659?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            document.getElementById('checkout').classList.remove('hidden');
+            document.getElementById('cart').classList.add('hidden');
         }
 
-        function showCategory(categoryId) {
-            const categoryElement = document.getElementById(categoryId);
-            if (!categoryElement) {
-                console.error(`Category element with id '${categoryId}' not found.`);
-                return;
+        document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const shippingDetails = {
+                name: document.getElementById('shippingName').value,
+                address: document.getElementById('shippingAddress').value,
+                city: document.getElementById('shippingCity').value,
+                state: document.getElementById('shippingState').value,
+                zip: document.getElementById('shippingZip').value,
+                country: document.getElementById('shippingCountry').value
+            };
+            const billingDetails = {
+                name: document.getElementById('billingName').value,
+                address: document.getElementById('billingAddress').value,
+                city: document.getElementById('billingCity').value,
+                state: document.getElementById('billingState').value,
+                zip: document.getElementById('billingZip').value,
+                country: document.getElementById('billingCountry').value
+            };
+            const amount = calculateTotalAmount(); // Implement this function to calculate the total amount
+            const email = 'customer@example.com'; // Replace with the customer's email
+
+            try {
+                const response = await fetch('/payments/create-payment-intent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount, email, items: cart, shippingDetails, billingDetails })
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.error || 'Failed to create payment intent');
+
+                // Redirect to Paystack payment page
+                const handler = PaystackPop.setup({
+                    key: 'your_paystack_public_key', // Replace with your Paystack public key
+                    email: email,
+                    amount: amount * 100, // Amount in kobo
+                    currency: 'NGN',
+                    ref: result.reference, // Use the reference from the backend
+                    callback: function(response) {
+                        // Payment was successful
+                        window.location.href = `/payments/verify-payment?reference=${response.reference}`;
+                    },
+                    onClose: function() {
+                        alert('Payment cancelled');
+                    }
+                });
+                handler.openIframe();
+            } catch (error) {
+                alert(error.message);
             }
-            document.querySelectorAll('.products').forEach(section => {
-                section.classList.add('hidden');
+        });
+
+        let currentImageIndex = 0;
+        let currentImages = [];
+
+        function openModal(images) {
+            currentImages = images;
+            currentImageIndex = 0;
+            showImage(currentImageIndex);
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'block';
+            document.getElementById('thumb1').src = images[0];
+            document.getElementById('thumb2').src = images[1];
+            document.getElementById('thumb3').src = images[2];
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+
+        function showImage(index) {
+            currentImageIndex = index;
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = currentImages[index];
+            document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
             });
-            categoryElement.classList.remove('hidden');
-            categoryElement.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.querySelector('.close').onclick = closeModal;
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         }
 
         async function loadProducts() {
@@ -172,7 +309,7 @@
                         const productDiv = document.createElement('div');
                         productDiv.className = 'product';
                         productDiv.innerHTML = `
-                            <img src="${product.image}" alt="${product.name}">
+                            <img src="${product.image}" alt="${product.name}" onclick="openModal(['${product.image}', '${product.image2}', '${product.image3}'])">
                             <div class="product-details">
                                 <h3>${product.name}</h3>
                                 <p>Color - ${product.color}</p>
@@ -217,6 +354,67 @@
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            try {
+                const response = await fetch('/users/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+                if (!response.ok) throw new Error('Registration failed');
+                alert('Registration successful!');
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            try {
+                const response = await fetch('/users/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                if (!response.ok) throw new Error('Login failed');
+                const { token } = await response.json();
+                localStorage.setItem('token', token);
+                alert('Login successful!');
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        async function handlePayment() {
+            const amount = calculateTotalAmount(); // Implement this function to calculate the total amount
+            try {
+                const response = await fetch('/payments/create-payment-intent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount })
+                });
+                if (!response.ok) throw new Error('Payment failed');
+                const { clientSecret } = await response.json();
+                const stripe = Stripe('your_stripe_public_key');
+                const { error } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: elements.getElement(CardElement), // Implement Stripe Elements
+                        billing_details: { name: 'Customer Name' }
+                    }
+                });
+                if (error) throw new Error(error.message);
+                alert('Payment successful!');
+            } catch (error) {
+                alert(error.message);
+            }
         }
     </script>
 </body>
