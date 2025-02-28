@@ -76,7 +76,7 @@
         <p>&copy; 2025. All Rights Reserved.</p>
     </footer>
 
-    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">↑</button>
 
     <script type="module">
         import config from './src/config.js';
@@ -315,7 +315,7 @@
         }
 
         window.onscroll = function() {
-            const backToTopButton = document.querySelector('.back-to-top');
+            const backToTopButton = document.getElementById('back-to-top');
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 backToTopButton.style.display = 'block';
             } else {
