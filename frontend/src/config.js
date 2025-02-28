@@ -1,5 +1,5 @@
 const config = {
-    backendUrl: 'https://your-backend-url'
+    backendUrl: 'C:\\Users\\user pc\\Desktop\\EMASON-HUB\\backend' // Replace with your actual backend URL
 };
 
 export default config;

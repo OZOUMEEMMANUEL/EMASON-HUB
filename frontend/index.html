@@ -245,7 +245,7 @@
                 console.log('Fetching products from backend...');
                 const response = await fetch(`${backendUrl}/admin/products`);
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
                 }
                 productsData = await response.json();
                 console.log('Loaded products:', productsData); // Log the loaded products
