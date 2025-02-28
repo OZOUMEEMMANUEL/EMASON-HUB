@@ -19,7 +19,7 @@ header {
     padding: 15px 20px;
     background: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .logo {
@@ -32,6 +32,9 @@ header {
 
 nav {
     flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 nav ul {
@@ -39,7 +42,7 @@ nav ul {
     display: flex;
     gap: 1px;
     justify-content: flex-end;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 nav ul li {
