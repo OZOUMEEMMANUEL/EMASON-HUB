@@ -83,10 +83,6 @@
         import config from './src/config.js';
         import { loadProducts, showCategory, updatePrice, changeQuantity, addToCart, removeFromCart, placeOrder, verifyPayment, goToCheckout, scrollToTop } from './src/cart.js';
 
-        const backendUrl = config.backendUrl;
-        const cart = [];
-        let productsData = {};
-
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const reference = urlParams.get('reference');
