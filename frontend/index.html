@@ -12,9 +12,10 @@
             <img src="images/logo.png" alt="Emason Hub Logo">
         </div>
         <nav>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="#home">HOME</a></li>
                 <li><a href="#catalog">SHOP BY CATEGORY</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
                 <li>
                     <button class="cart-button" onclick="location.href='#cart'">
                         <img src="images/cart.png" alt="Cart">
@@ -22,6 +23,9 @@
                     </button>
                 </li>
             </ul>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
         </nav>
     </header>
     
@@ -66,6 +70,25 @@
             <p>- Tunde Adeyemi</p>
         </div>
         <img src="images/logo.png" alt="Emason Hub Logo" class="testimonials-img">
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
     </section>
 
     <footer>
@@ -264,9 +287,9 @@
                         const productDiv = document.createElement('div');
                         productDiv.className = 'product';
                         productDiv.innerHTML = `
-                            <img src="${product.image}" alt="${product.name}">
+                            <img src="${product.image}" alt="${product.name}" onclick="viewProduct('${categoryId}', ${index})">
                             <div class="product-details">
-                                <h3>${product.name}</h3>
+                                <h3 onclick="viewProduct('${categoryId}', ${index})">${product.name}</h3>
                                 <p>Color - ${product.color}</p>
                                 <p>
                                     <label for="size${categoryId}${index}">Size:</label>
@@ -297,6 +320,12 @@
             }
         }
 
+        function viewProduct(categoryId, index) {
+            const product = productsData[categoryId][index];
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+            window.location.href = 'product.html';
+        }
+
         function showCategory(categoryId) {
             try {
                 const container = document.getElementById('products-container');
@@ -316,9 +345,9 @@
                     const productDiv = document.createElement('div');
                     productDiv.className = 'product';
                     productDiv.innerHTML = `
-                        <img src="${product.image}" alt="${product.name}">
+                        <img src="${product.image}" alt="${product.name}" onclick="viewProduct('${categoryId}', ${index})">
                         <div class="product-details">
-                            <h3>${product.name}</h3>
+                            <h3 onclick="viewProduct('${categoryId}', ${index})">${product.name}</h3>
                             <p>Color - ${product.color}</p>
                             <p>
                                 <label for="size${categoryId}${index}">Size:</label>
@@ -369,6 +398,37 @@
                 console.error('Error going to checkout:', error);
             }
         }
+
+        document.getElementById('contact-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            try {
+                const response = await fetch(`${backendUrl}/contact`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    document.getElementById('contact-form').reset();
+                } else {
+                    alert('Failed to send message. Please try again later.');
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                alert('Failed to send message. Please try again later.');
+            }
+        });
+
+        document.querySelector('.nav-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('nav-open');
+        });
     </script>
 </body>
 </html>

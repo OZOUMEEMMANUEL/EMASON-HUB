@@ -13,10 +13,10 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html#home">HOME</a></li>
+                <li><a href="index.html">HOME</a></li>
                 <li><a href="index.html#catalog">SHOP BY CATEGORY</a></li>
                 <li>
-                    <button class="cart-button" onclick="location.href='index.html#cart'">
+                    <button class="cart-button" onclick="location.href='checkout.html'">
                         <img src="images/cart.png" alt="Cart">
                         CART (<span id="cart-count">0</span>)
                     </button>
@@ -27,9 +27,26 @@
 
     <section id="checkout" class="checkout">
         <h2 class="section-title">Checkout</h2>
-        <div id="order-details"></div>
-        <p>Total Price: <span id="total-price">₦0</span></p>
-        <button class="proceed-payment-button" onclick="proceedToPayment()">PROCEED TO PAYMENT</button>
+        <table id="checkout-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Color</th>
+                    <th>Size</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="checkout-items"></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">Total</td>
+                    <td id="total-price">₦0</td>
+                </tr>
+            </tfoot>
+        </table>
+        <button class="place-order-button" onclick="placeOrder()">PLACE ORDER</button>
     </section>
 
     <footer>
@@ -39,28 +56,73 @@
     </footer>
 
     <script>
+        let cart = [];
+
         document.addEventListener('DOMContentLoaded', () => {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const orderDetails = document.getElementById('order-details');
-            const totalPriceElement = document.getElementById('total-price');
+            loadCart();
+            displayCheckoutItems();
+        });
+
+        function loadCart() {
+            const storedCart = localStorage.getItem('cart');
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+            }
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            try {
+                document.getElementById('cart-count').innerText = cart.length;
+            } catch (error) {
+                console.error('Error updating cart count:', error);
+            }
+        }
+
+        function displayCheckoutItems() {
+            const checkoutItems = document.getElementById('checkout-items');
+            checkoutItems.innerHTML = '';
             let totalPrice = 0;
 
             cart.forEach(item => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'order-item';
-                itemDiv.innerHTML = `
-                    <p>${item.name} - ${item.color} - ${item.size} - Quantity: ${item.quantity} - ${item.price}</p>
+                const subtotal = parseFloat(item.price.replace('₦', '')) * item.quantity;
+                totalPrice += subtotal;
+
+                const itemRow = document.createElement('tr');
+                itemRow.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.color}</td>
+                    <td>${item.size}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.price}</td>
+                    <td>₦${subtotal}</td>
                 `;
-                orderDetails.appendChild(itemDiv);
-                totalPrice += parseFloat(item.price.replace('₦', '')) * item.quantity;
+                checkoutItems.appendChild(itemRow);
             });
 
-            totalPriceElement.innerText = `₦${totalPrice}`;
-        });
+            document.getElementById('total-price').innerText = `₦${totalPrice}`;
+        }
 
-        function proceedToPayment() {
-            window.location.href = 'index.html#cart';
-            placeOrder();
+        function placeOrder() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            const orderDetails = {
+                items: cart,
+                amount: cart.reduce((total, item) => total + parseFloat(item.price.replace('₦', '')) * item.quantity, 0)
+            };
+
+            try {
+                console.log('Placing order:', orderDetails); // Log the order details
+                alert('Order placed successfully!');
+                localStorage.removeItem('cart');
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Error placing order:', error);
+                alert('Failed to place order. Please try again later.');
+            }
         }
     </script>
 </body>

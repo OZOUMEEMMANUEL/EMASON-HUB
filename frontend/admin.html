@@ -48,8 +48,10 @@
         <p>&copy; 2025. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        const backendUrl = 'https://your-backend-url';
+    <script type="module">
+        import config from './src/config.js';
+
+        const backendUrl = config.backendUrl;
 
         let productsData = {};
 
