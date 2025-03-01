@@ -44,9 +44,8 @@
             <button onclick="showCategory('wallpapers')">Wallpapers</button>
             <button onclick="showCategory('windowblinds')">Window Blinds</button>
         </div>
+        <div id="product-list"></div> <!-- New div to display products -->
     </section>
-
-    <div id="products-container"></div>
 
     <section id="cart" class="cart">
         <h2 class="section-title">Your Cart</h2>
@@ -104,6 +103,17 @@
         document.querySelector('.nav-toggle').addEventListener('click', () => {
             document.querySelector('.nav-links').classList.toggle('nav-open');
         });
+
+        // Ensure showCategory is available globally
+        window.showCategory = showCategory;
+
+        // Function to navigate to product.html with product details
+        window.viewProduct = (category, index) => {
+            const products = getProductsByCategory(category);
+            const product = products[index];
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+            window.location.href = 'product.html';
+        };
     </script>
 </body>
 </html>

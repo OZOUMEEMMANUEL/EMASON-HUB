@@ -12,6 +12,7 @@ export async function loadProducts() {
         }
         const productsData = await response.json();
         setProductsData(productsData);
+        displayProducts(productsData);
         console.log('Loaded products:', productsData); // Log the loaded products
     } catch (error) {
         console.error('Failed to load products:', error);
@@ -19,17 +20,11 @@ export async function loadProducts() {
     }
 }
 
-export function showCategory(categoryId) {
-    try {
-        const container = document.getElementById('products-container');
-        container.innerHTML = ''; // Clear any existing content
+function displayProducts(productsData) {
+    const container = document.getElementById('products-container');
+    container.innerHTML = ''; // Clear any existing content
 
-        const productsData = getProductsData();
-        if (!productsData[categoryId]) {
-            console.error(`Category '${categoryId}' not found.`);
-            return;
-        }
-
+    Object.keys(productsData).forEach(categoryId => {
         const section = document.createElement('section');
         section.id = categoryId;
         section.className = 'products';
@@ -65,10 +60,56 @@ export function showCategory(categoryId) {
         });
 
         container.appendChild(section);
-        section.scrollIntoView({ behavior: 'smooth' });
-    } catch (error) {
-        console.error('Error showing category:', error);
-    }
+    });
+}
+
+export function showCategory(category) {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = ''; // Clear previous products
+
+    // Fetch products based on category
+    const products = getProductsByCategory(category);
+
+    products.forEach((product, index) => {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product';
+        productDiv.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" onclick="viewProduct('${category}', ${index})">
+            <h3 onclick="viewProduct('${category}', ${index})">${product.name}</h3>
+            <p>${product.description}</p>
+            <p>Color - ${product.color}</p>
+            <p>Price: ₦${product.sizes.small}</p>
+        `;
+        productList.appendChild(productDiv);
+    });
+}
+
+function getProductsByCategory(category) {
+    // Placeholder function, replace with actual data fetching logic
+    const allProducts = {
+        curtains: [
+            { id: 1, name: 'Curtain 1', description: 'Beautiful curtain', price: 50, image: 'images/curtain1.jpg', color: 'Red', sizes: { small: 50, medium: 60, large: 70 } },
+            { id: 2, name: 'Curtain 2', description: 'Elegant curtain', price: 60, image: 'images/curtain2.jpg', color: 'Blue', sizes: { small: 60, medium: 70, large: 80 } },
+            { id: 3, name: 'Curtain 3', description: 'Modern curtain', price: 55, image: 'images/curtain3.jpg', color: 'Green', sizes: { small: 55, medium: 65, large: 75 } },
+            { id: 4, name: 'Curtain 4', description: 'Classic curtain', price: 70, image: 'images/curtain4.jpg', color: 'Yellow', sizes: { small: 70, medium: 80, large: 90 } },
+            { id: 5, name: 'Curtain 5', description: 'Stylish curtain', price: 65, image: 'images/curtain5.jpg', color: 'Purple', sizes: { small: 65, medium: 75, large: 85 } }
+        ],
+        wallpapers: [
+            { id: 6, name: 'Wallpaper 1', description: 'Stylish wallpaper', price: 30, image: 'images/wallpaper1.jpg', color: 'Red', sizes: { small: 30, medium: 40, large: 50 } },
+            { id: 7, name: 'Wallpaper 2', description: 'Modern wallpaper', price: 40, image: 'images/wallpaper2.jpg', color: 'Blue', sizes: { small: 40, medium: 50, large: 60 } },
+            { id: 8, name: 'Wallpaper 3', description: 'Elegant wallpaper', price: 35, image: 'images/wallpaper3.jpg', color: 'Green', sizes: { small: 35, medium: 45, large: 55 } },
+            { id: 9, name: 'Wallpaper 4', description: 'Classic wallpaper', price: 45, image: 'images/wallpaper4.jpg', color: 'Yellow', sizes: { small: 45, medium: 55, large: 65 } },
+            { id: 10, name: 'Wallpaper 5', description: 'Beautiful wallpaper', price: 50, image: 'images/wallpaper5.jpg', color: 'Purple', sizes: { small: 50, medium: 60, large: 70 } }
+        ],
+        windowblinds: [
+            { id: 11, name: 'Window Blind 1', description: 'Classic window blind', price: 70, image: 'images/windowblind1.jpg', color: 'Red', sizes: { small: 70, medium: 80, large: 90 } },
+            { id: 12, name: 'Window Blind 2', description: 'Contemporary window blind', price: 80, image: 'images/windowblind2.jpg', color: 'Blue', sizes: { small: 80, medium: 90, large: 100 } },
+            { id: 13, name: 'Window Blind 3', description: 'Modern window blind', price: 75, image: 'images/windowblind3.jpg', color: 'Green', sizes: { small: 75, medium: 85, large: 95 } },
+            { id: 14, name: 'Window Blind 4', description: 'Elegant window blind', price: 85, image: 'images/windowblind4.jpg', color: 'Yellow', sizes: { small: 85, medium: 95, large: 105 } },
+            { id: 15, name: 'Window Blind 5', description: 'Stylish window blind', price: 90, image: 'images/windowblind5.jpg', color: 'Purple', sizes: { small: 90, medium: 100, large: 110 } }
+        ]
+    };
+    return allProducts[category] || [];
 }
 
 export function updatePrice(sizeId, quantityId, priceId, productId) {
