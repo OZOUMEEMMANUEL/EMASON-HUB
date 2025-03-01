@@ -1,17 +1,17 @@
 import config from './config.js';
+import { getCart, setCart, getProductsData, setProductsData } from './state.js';
 
 const backendUrl = config.backendUrl;
-const cart = [];
-let productsData = {};
 
 export async function loadProducts() {
     try {
         console.log('Fetching products from backend...');
-        const response = await fetch('products.json');
+        const response = await fetch(`${backendUrl}/products`);
         if (!response.ok) {
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }
-        productsData = await response.json();
+        const productsData = await response.json();
+        setProductsData(productsData);
         console.log('Loaded products:', productsData); // Log the loaded products
     } catch (error) {
         console.error('Failed to load products:', error);
@@ -24,6 +24,7 @@ export function showCategory(categoryId) {
         const container = document.getElementById('products-container');
         container.innerHTML = ''; // Clear any existing content
 
+        const productsData = getProductsData();
         if (!productsData[categoryId]) {
             console.error(`Category '${categoryId}' not found.`);
             return;
@@ -72,6 +73,7 @@ export function showCategory(categoryId) {
 
 export function updatePrice(sizeId, quantityId, priceId, productId) {
     try {
+        const productsData = getProductsData();
         const size = document.getElementById(sizeId).value;
         const quantity = document.getElementById(quantityId).value;
         const pricePerUnit = productsData[productId].sizes[size];
@@ -99,10 +101,12 @@ export function changeQuantity(quantityId, delta) {
 
 export function addToCart(name, color, sizeId, quantityId, priceId) {
     try {
+        const cart = getCart();
         const size = document.getElementById(sizeId).value;
         const quantity = document.getElementById(quantityId).value;
-        const price = document.getElementById(priceId).innerText;
+        const price = document.getElementById(priceId).innerText.replace('₦', '');
         cart.push({ name, color, size, quantity, price });
+        setCart(cart);
         updateCartCount();
         displayCartItems();
     } catch (error) {
@@ -112,6 +116,7 @@ export function addToCart(name, color, sizeId, quantityId, priceId) {
 
 export function updateCartCount() {
     try {
+        const cart = getCart();
         document.getElementById('cart-count').innerText = cart.length;
     } catch (error) {
         console.error('Error updating cart count:', error);
@@ -120,13 +125,14 @@ export function updateCartCount() {
 
 export function displayCartItems() {
     try {
+        const cart = getCart();
         const cartItems = document.getElementById('cart-items');
         cartItems.innerHTML = '';
         cart.forEach((item, index) => {
             const itemDiv = document.createElement('div');
             itemDiv.className = 'cart-item';
             itemDiv.innerHTML = `
-                <p>${item.name} - ${item.color} - ${item.size} - Quantity: ${item.quantity} - ${item.price}</p>
+                <p>${item.name} - ${item.color} - ${item.size} - Quantity: ${item.quantity} - ₦${item.price}</p>
                 <button onclick="removeFromCart(${index})">REMOVE</button>
             `;
             cartItems.appendChild(itemDiv);
@@ -138,7 +144,9 @@ export function displayCartItems() {
 
 export function removeFromCart(index) {
     try {
+        const cart = getCart();
         cart.splice(index, 1);
+        setCart(cart);
         updateCartCount();
         displayCartItems();
     } catch (error) {
@@ -147,6 +155,7 @@ export function removeFromCart(index) {
 }
 
 export async function placeOrder() {
+    const cart = getCart();
     if (cart.length === 0) {
         alert('Your cart is empty!');
         return;
@@ -175,7 +184,7 @@ export async function placeOrder() {
         items: cart,
         shippingDetails,
         billingDetails,
-        amount: cart.reduce((total, item) => total + parseFloat(item.price.replace('₦', '')), 0),
+        amount: cart.reduce((total, item) => total + parseFloat(item.price), 0),
         email: shippingDetails.email
     };
 
@@ -220,6 +229,7 @@ export async function verifyPayment(reference) {
 
 export function goToCheckout() {
     try {
+        const cart = getCart();
         localStorage.setItem('cart', JSON.stringify(cart));
         window.location.href = 'checkout.html';
     } catch (error) {
